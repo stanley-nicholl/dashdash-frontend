@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 import './App.css';
 import Login from './components/Login'
 import SignIn from './components/SignIn'
@@ -24,7 +25,7 @@ class App extends Component {
 
   pages = {
     login: <Login />,
-    signIn: <SignIn />
+    signIn: <SignIn />,
     gettingStarted: <GettingStarted />,
     guided1: <Guided1 />,
     guided2: <Guided2 />,
@@ -38,19 +39,39 @@ class App extends Component {
     inProgressSchedule: <InProgressSchedule/>
   }
 
-  updatePageState = (page) => {
+  updatePageState = (e) => {
+    e.preventDefault()
+    console.log('test');
+    alert(e.target.name.value)
+
+    const page = e.target.page.value
+
     this.setState({page: page})
   }
 
   showPage = (page) => {
-     return (this.pages[page])
+    console.log(this.state.page);
+    const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?page=${page}`;
+    window.history.pushState({path:newUrl},'',newUrl);
+    return (this.pages[page])
   }
+
+  //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
 
   render() {
     return (
-      <div className="App">
-        {this.showPage(this.state.page)}
-      </div>
+      <Router>
+        <div className="App">
+          <Route path='/login' component={'./components/Login'}/>
+          <Route path='/gettingStarted' component={'./components/GettingStarted'}/>
+          <Route path='/guided1' component={'./components/Guided1'}/>
+          <Route path='/inProgressSchedule' component={'./components/InProgressSchedule'}/>
+          <Route path='/myProfile' component={'./components/MyProfile'}/>
+          <Route path='/scheduleDashboard' component={'./components/ScheduleDashboard'}/>
+          <Route path='/selectedSchedule' component={'./components/SelectedSchedule'}/>
+          <Route path='/upcomingWeek' component={'./components/UpcomingWeek'}/>
+        </div>
+    </Router>
     );
   }
 }
