@@ -1,1 +1,84 @@
 /* Your custom styles */
+
+/*FONTS FONTS FONTS*/
+/*font-family: 'Montserrat', sans-serif;*/
+
+/*FONTS FONTS FONTS*/
+
+.body{
+  font-family: 'Montserrat', sans-serif;
+  color: #1C77C3;
+  background-color: #EAEBED;
+  height: 100vh;
+}
+
+.title{
+  background-color: #1C77C3;
+  color: #EAEBED;
+}
+
+.selection-img{
+  height: 15vh;
+  width: auto;
+}
+
+/*COMMON STYLING COMMON STYLING*/
+
+/*highlight font with orange:*/
+
+.orange-highlight-text{
+  color: #F0A202
+}
+
+.orange-highlight-bg{
+  background-color: #F0A202;
+}
+
+/*COMMON COMPONENTS COMMON COMPONENTS*/
+
+.footer-container{
+  background-color: #F0A202;
+  color: #13293D;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.footer-icon{
+  max-height: 5vh;
+}
+
+.plan-item{
+  background-color: #13293D;
+  width: 90vw;
+}
+
+.order-img{
+  height: 3vh;
+  width: auto;
+}
+
+/*loading spinner*/
+
+.loading {
+  height: 25vh;
+  width: auto;
+	-webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+/*switch formatting*/
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #F0A202 !important;
+}
