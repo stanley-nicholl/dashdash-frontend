@@ -27,14 +27,14 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route path='/:login' component={Login}/>
+          <Route path='/' component={Login}/>
           <Route path='/:gettingStarted' component={GettingStarted}/>
           <Route path='/:scheduleType' component={ScheduleType}/>
           <Route path='/:' component={Configuring}/>
           <Route path='/:inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/:myProfile' component={MyProfile}/>
           <Route path='/:scheduleDashboard' component={ScheduleDashboard}/>
-          <Route path='/' component={EditSchedule}/>
+          <Route path='/:editSchedule' component={EditSchedule}/>
           <Route path='/:upcomingWeek' component={UpcomingWeek}/>
         </div>
     </Router>

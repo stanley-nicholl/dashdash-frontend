@@ -12,6 +12,31 @@
   height: 100vh;
 }
 
+.body-login{
+  font-family: 'Montserrat', sans-serif;
+  color: #1C77C3;
+  background-image: url("../img/branding/in-a-rush.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dim-login{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: .4;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+.content-login{
+  color: #EAEBED;
+  z-index: 5;
+}
+
 .title{
   background-color: #1C77C3;
   color: #EAEBED;
@@ -52,11 +77,26 @@
 
 .plan-item{
   background-color: #13293D;
+  color: #EAEBED;
   width: 90vw;
+}
+
+.item-name{
+  font-size: .8rem;
+}
+
+.md-form input{
+  color: #EAEBED;
+  text-align: center;
 }
 
 .order-img{
   height: 3vh;
+  width: auto;
+}
+
+.skippable-img{
+  height: 5vh;
   width: auto;
 }
 
