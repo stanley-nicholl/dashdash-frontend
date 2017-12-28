@@ -4,7 +4,7 @@ const GettingStarted = () => {
 
   return (
     <div className="body">
-      <h2 className="py-4 mb-4 title font-weight-bold">a few quick q's</h2>
+      <h2 className="py-4 mb-4 title font-weight-bold">one quick question</h2>
       <img className="selection-img mb-2" src="./img/branding/kids-orange.svg" />
       <h5 className="mb-4">do you have kids?</h5>
       <div className="switch">

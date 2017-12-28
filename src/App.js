@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import './App.css';
-import Login from './components/Login'
 import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
 import GettingStarted from './components/GettingStarted'
 import ScheduleType from './components/ScheduleType'
+import ArrivalTime from './components/ArrivalTime'
 import Configuring from './components/Configuring'
-import Guided3 from './components/Guided3'
-import Guided4 from './components/Guided4'
-import Guided5 from './components/Guided5'
 import EditSchedule from './components/EditSchedule'
 import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
@@ -27,10 +25,12 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route path='/' component={Login}/>
+          <Route path='/:signIn' component={SignIn}/>
+          <Route path='/:signUp' component={SignUp}/>
           <Route path='/:gettingStarted' component={GettingStarted}/>
           <Route path='/:scheduleType' component={ScheduleType}/>
-          <Route path='/:' component={Configuring}/>
+          <Route path='/' component={ArrivalTime}/>
+          <Route path='/:configuring' component={Configuring}/>
           <Route path='/:inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/:myProfile' component={MyProfile}/>
           <Route path='/:scheduleDashboard' component={ScheduleDashboard}/>
@@ -40,6 +40,7 @@ class App extends Component {
     </Router>
     );
   }
+
 }
 
 export default App;

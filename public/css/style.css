@@ -12,6 +12,18 @@
   height: 100vh;
 }
 
+.title{
+  background-color: #1C77C3;
+  color: #EAEBED;
+}
+
+.selection-img{
+  height: 15vh;
+  width: auto;
+}
+
+/*LOGIN LOGIN LOGIN LOGIN*/
+
 .body-login{
   font-family: 'Montserrat', sans-serif;
   color: #1C77C3;
@@ -22,9 +34,7 @@
 }
 
 .dim-login{
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
   background-color: #000;
   opacity: .4;
   height: 100vh;
@@ -34,17 +44,42 @@
 
 .content-login{
   color: #EAEBED;
-  z-index: 5;
+  z-index: 10;
 }
 
-.title{
-  background-color: #1C77C3;
-  color: #EAEBED;
+/*LOGIN LOGIN LOGIN LOGIN SIGNUP SIGNUP SIGNUP SIGNUP*/
+
+.form-dark .font-small {
+  font-size: 0.8rem; }
+
+.form-dark .md-form label {
+  color: #fff; }
+
+.form-dark input[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #1C77C3;
+  -webkit-box-shadow: 0 1px 0 0 #1C77C3;
+  box-shadow: 0 1px 0 0 #1C77C3; }
+
+.form-dark input[type=text]:focus:not([readonly]) + label {
+  color: #fff; }
+
+.form-dark input[type=password]:focus:not([readonly]) {
+  border-bottom: 1px solid #1C77C3;
+  -webkit-box-shadow: 0 1px 0 0 #1C77C3;
+  box-shadow: 0 1px 0 0 #1C77C3; }
+
+.form-dark input[type=password]:focus:not([readonly]) + label {
+  color: #fff; }
+
+.card-content{
+  flex-grow: 2;
+  height: 100vh;
 }
 
-.selection-img{
-  height: 15vh;
-  width: auto;
+.card-image{
+  background-image: url("../img/branding/in-a-rush.jpg");
+  flex-grow: 2;
+  height: 100vh;
 }
 
 /*COMMON STYLING COMMON STYLING*/
