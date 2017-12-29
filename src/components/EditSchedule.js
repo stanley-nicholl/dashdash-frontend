@@ -4,7 +4,21 @@ const EditSchedule = () => {
 
   return (
     <div className="body">
-      <h3 className="py-4 mb-4 title font-weight-bold">weekday schedule</h3>
+      <div className="d-flex title align-items-center justify-content-center">
+        <h3 className="py-4 title font-weight-bold">weekday schedule</h3>
+        <img className="edit-img pl-1 mb-2" src="./img/branding/edit-white.svg" />
+      </div>
+      <div className="container">
+        <div className="days d-flex justify-content-around my-3">
+          <div className="day">Su</div>
+          <div className="day">M</div>
+          <div className="day">T</div>
+          <div className="day">W</div>
+          <div className="day">Th</div>
+          <div className="day">F</div>
+          <div className="day">S</div>
+        </div>
+      </div>
       <div className="plan-items d-flex flex-column align-items-center">
         <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
           <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
@@ -40,6 +54,7 @@ const EditSchedule = () => {
           </div>
         </div>
       </div>
+
 
       <div className="footer-container py-3">
         <h4 className="font-weight-bold mt-1">UPDATE ></h4>

@@ -29,13 +29,13 @@ class App extends Component {
           <Route path='/:signUp' component={SignUp}/>
           <Route path='/:gettingStarted' component={GettingStarted}/>
           <Route path='/:scheduleType' component={ScheduleType}/>
-          <Route path='/' component={ArrivalTime}/>
+          <Route path='/:' component={ArrivalTime}/>
           <Route path='/:configuring' component={Configuring}/>
           <Route path='/:inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/:myProfile' component={MyProfile}/>
           <Route path='/:scheduleDashboard' component={ScheduleDashboard}/>
-          <Route path='/:editSchedule' component={EditSchedule}/>
-          <Route path='/:upcomingWeek' component={UpcomingWeek}/>
+          <Route path='/' component={EditSchedule}/>
+          <Route path='/:' component={UpcomingWeek}/>
         </div>
     </Router>
     );

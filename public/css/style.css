@@ -82,6 +82,19 @@
   height: 100vh;
 }
 
+/*PROFILE PROFILE PROFILE PROFILE*/
+
+.profile-img{
+  height: 10vh;
+  width: auto;
+}
+
+.badge-img{
+  max-width: 20vw;
+  height: auto;
+  margin-bottom: .5rem;
+}
+
 /*COMMON STYLING COMMON STYLING*/
 
 /*highlight font with orange:*/
@@ -125,6 +138,11 @@
   text-align: center;
 }
 
+.edit-img{
+  height: 5vh;
+  width: auto;
+}
+
 .order-img{
   height: 3vh;
   width: auto;
@@ -133,6 +151,17 @@
 .skippable-img{
   height: 5vh;
   width: auto;
+}
+
+.day{
+  font-size: .9rem;
+  text-align: center;
+  padding-top: .25rem;
+  background-color: #13293D;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  color: #EAEBED;
 }
 
 /*loading spinner*/
