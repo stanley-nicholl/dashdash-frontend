@@ -1,4 +1,5 @@
 import React from 'react'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 const GettingStarted = () => {
 
@@ -27,7 +28,9 @@ const GettingStarted = () => {
         </label>
       </div>
       <div className="footer-container py-3">
-        <h4 className="font-weight-bold mt-1">NEXT ></h4>
+        <Link to={'/scheduleType'}>
+          <h4 className="font-weight-bold mt-1">NEXT ></h4>
+        </Link>
       </div>
     </div>
   )
