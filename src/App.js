@@ -12,6 +12,7 @@ import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
 import ScheduleDashboard from './components/ScheduleDashboard'
 import InProgressSchedule from './components/InProgressSchedule'
+import Navigation from './components/common-elements/Navigation'
 
 class App extends Component {
   constructor(){
@@ -20,22 +21,28 @@ class App extends Component {
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
+  //REMOVE NAVIGATION - JUST HERE FOR DEV
 
+  //FIGURE OUT HOW TO TOGGLE NAVIGATION ON AND OFF
   render() {
     return (
       <Router>
         <div className="App">
-          <Route path='/:signIn' component={SignIn}/>
-          <Route path='/:signUp' component={SignUp}/>
-          <Route path='/:gettingStarted' component={GettingStarted}/>
-          <Route path='/:scheduleType' component={ScheduleType}/>
-          <Route path='/:' component={ArrivalTime}/>
-          <Route path='/:configuring' component={Configuring}/>
-          <Route path='/:inProgressSchedule' component={InProgressSchedule}/>
-          <Route path='/:myProfile' component={MyProfile}/>
-          <Route path='/:scheduleDashboard' component={ScheduleDashboard}/>
-          <Route path='/' component={EditSchedule}/>
-          <Route path='/:' component={UpcomingWeek}/>
+          <Route path='/signIn' component={SignIn}/>
+          <Route path='/signUp' component={SignUp}/>
+          <Route exact path='/gettingStarted' component={GettingStarted}/>
+          <Route exact path='/scheduleType' component={ScheduleType}/>
+          <Route exact path='/arrivalTime' component={ArrivalTime}/>
+
+
+          <Route exact path='/configuring' component={Configuring}/>
+          <Route path='/inProgressSchedule' component={InProgressSchedule}/>
+          <Route path='/myProfile' component={MyProfile}/>
+          <Route path='/scheduleDashboard' component={ScheduleDashboard}/>
+          <Route path='/editSchedule' component={EditSchedule}/>
+          <Route path='/upcomingWeek' component={UpcomingWeek}/>
+          <Route path='/navigation' component={Navigation}/>
+
         </div>
     </Router>
     );

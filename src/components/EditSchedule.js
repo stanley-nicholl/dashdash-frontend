@@ -1,4 +1,5 @@
 import React from 'react'
+import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 
 const EditSchedule = () => {
 
@@ -10,13 +11,13 @@ const EditSchedule = () => {
       </div>
       <div className="container">
         <div className="days d-flex justify-content-around my-3">
-          <div className="day">Su</div>
-          <div className="day">M</div>
-          <div className="day">T</div>
-          <div className="day">W</div>
-          <div className="day">Th</div>
-          <div className="day">F</div>
-          <div className="day">S</div>
+          <DayOfWeekBtn day="Su"/>
+          <DayOfWeekBtn day="M"/>
+          <DayOfWeekBtn day="T"/>
+          <DayOfWeekBtn day="W"/>
+          <DayOfWeekBtn day="Th"/>
+          <DayOfWeekBtn day="F"/>
+          <DayOfWeekBtn day="S"/>
         </div>
       </div>
       <div className="plan-items d-flex flex-column align-items-center">
