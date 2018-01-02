@@ -19,12 +19,87 @@ class App extends Component {
     super()
     this.state = { 
       userToken: null,
-      user: null
+      userId: null,
+      firstname: null,
+      lastname: null,
+      email: null,
+      children: null,
+      pets: null,
+      plans: [],
+      newScheduleType: null, 
+      newDaysOfTheWeek: null
     }
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    // check for previously logged in user
+    const userToken = localStorage.getItem('dashdashUserToken')
+    if (userToken) {
+      const user = await this.fetchUserData(userToken)
+      // if user exists, save user data to state
+      if (user) this.setState({ userToken, ...user })
+    }
+  }
 
+  shouldComponentUpdate() {
+    if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
+  }
+
+  // GET USER DATA
+  fetchUserData = async (token) => {
+    // get user data from API
+    const userDataResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/users/fromToken`, {
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    })
+    if (userDataResponse.status !== 200) return null // user does not exist on server
+    const userDataJSON = await userDataResponse.json()
+    const { id: userId, first_name: firstname, last_name: lastname, email, children, pets } = userDataJSON.User
+    return { userId, firstname, lastname, email, children, pets }
+  } 
+
+  // SIGNUP
+  signUp = async () => {
+    // clear prior error message
+    const signupMessagebox = document.querySelector('#signup-messagebox')
+    signupMessagebox.innerHTML = ''
+    // get form values
+    const firstname = document.querySelector('#signup-firstname').value
+    const lastname = document.querySelector('#signup-lastname').value
+    const email = document.querySelector('#signup-email').value
+    const password = document.querySelector('#signup-password').value
+    // send POST data to API
+    const signupResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/auth/signup`, {
+      method: 'POST',
+      body: JSON.stringify({ first_name: firstname, last_name: lastname, email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const signupJSON = await signupResponse.json()
+    // check for error
+    if (signupResponse.status !== 201) {
+      signupMessagebox.innerHTML = `
+        <div>
+          ${signupJSON.message}
+        </div>
+      `
+    } else {
+      // display success message
+      signupMessagebox.innerHTML = `
+        <div>
+          Welcome to DashDash, ${firstname}!
+        </div>
+      `
+      // get user data from API
+      const userToken = signupJSON.Auth
+      const user = await this.fetchUserData(userToken)
+      // save to local storage & state
+      localStorage.setItem('dashdashUserToken', userToken)
+      this.setState({ userToken, ...user })
+    }
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
@@ -36,7 +111,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route path='/signIn' component={SignIn}/>
-          <Route path='/signUp' component={SignUp}/>
+          <Route path='/signUp' component={ () => <SignUp functions={ this.signUp } /> } />
+          
+
           <Route exact path='/gettingStarted' component={GettingStarted}/>
           <Route exact path='/scheduleType' component={ScheduleType}/>
           <Route exact path='/arrivalTime' component={ArrivalTime}/>
