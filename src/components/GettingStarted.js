@@ -5,7 +5,9 @@ import NextButton from './common-elements/NextButton'
 const GettingStarted = () => {
 
   const grabData = (e) => {
-    console.log(e);
+    const kids = document.getElementById('kids')
+    const pets = document.getElementById('pets')
+    console.log(kids.checked, pets.checked);
   }
 
   return (
@@ -17,7 +19,7 @@ const GettingStarted = () => {
         <div className="switch">
           <label>
             no
-            <input type="checkbox" name="kids"/>
+            <input type="checkbox" id="kids"/>
             <span className="lever"></span>
             yes
           </label>
@@ -28,13 +30,13 @@ const GettingStarted = () => {
         <div className="switch">
           <label>
             no
-            <input type="checkbox"/>
+            <input type="checkbox" id="pets"/>
             <span className="lever"></span>
             yes
           </label>
         </div>
         <div className="footer-container py-3">
-          <Link to={'/scheduleType'} onSubmit={e => grabData(e)}>
+          <Link to={'/scheduleType'} onClick={e => grabData(e)}>
             <NextButton />
           </Link>
         </div>
