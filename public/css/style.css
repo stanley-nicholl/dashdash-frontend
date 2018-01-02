@@ -82,6 +82,19 @@
   height: 100vh;
 }
 
+/*PROFILE PROFILE PROFILE PROFILE*/
+
+.profile-img{
+  height: 10vh;
+  width: auto;
+}
+
+.badge-img{
+  max-width: 20vw;
+  height: auto;
+  margin-bottom: .5rem;
+}
+
 /*COMMON STYLING COMMON STYLING*/
 
 /*highlight font with orange:*/
@@ -141,6 +154,11 @@
   text-align: center;
 }
 
+.edit-img{
+  height: 5vh;
+  width: auto;
+}
+
 .order-img{
   height: 3vh;
   width: auto;
@@ -149,6 +167,105 @@
 .skippable-img{
   height: 5vh;
   width: auto;
+}
+
+.day{
+  color: #13293D;
+  font-size: .9rem;
+  text-align: center;
+  padding-top: .25rem;
+  background-color: #EAEBED;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  border: #13293D;
+}
+
+.active-day{
+  color: #fff;
+  font-size: .9rem;
+  text-align: center;
+  padding-top: .25rem;
+  background-color: #13293D;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  border: #13293D;
+}
+
+/* NAVIGATION NAVIGATION NAVIGATION */
+
+.navigation{
+  position: fixed;
+  /* right: 100%; */
+  width: 85vw;
+  height: 100vh;
+  background-color: #1C77C3;
+
+}
+
+.nav-top{
+  background-image: url("../img/branding/navigation-img.jpg");
+  background-size: cover;
+  height: 30vh;
+  opacity: .65;
+}
+
+.nav-title{
+  color: #EAEBED;
+}
+
+.logout-img{
+  height: 5vh;
+  width: auto;
+}
+
+.nav-img{
+  height: 4vh;
+  width: auto;
+}
+
+.nav-footer{
+  position: fixed;
+  bottom: 0;
+  width: 85vw;
+}
+
+/* UPCOMINGWEEK UPCOMINGWEEK UPCOMINGWEEK */
+
+.upcoming-content{
+  height: 75vh;
+}
+
+.upcoming-day-circle{
+  color: #fff;
+  font-size: .9rem;
+  text-align: center;
+  padding-top: .25rem;
+  background-color: #13293D;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  border: #13293D;
+}
+
+.upcoming-day-name{
+  color: #13293D;
+}
+
+.snooze-btn{
+  color: #EAEBED;
+  background-color: #F0A202;
+  font-size: .8rem;
+  height: 1.5rem;
+}
+
+.upcoming-footnote{
+  width: 100vw;
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
 }
 
 /*loading spinner*/

@@ -12,6 +12,11 @@ import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
 import ScheduleDashboard from './components/ScheduleDashboard'
 import InProgressSchedule from './components/InProgressSchedule'
+<<<<<<< HEAD
+=======
+import Navigation from './components/common-elements/Navigation'
+
+>>>>>>> 1cfa09bba791836d4aea5f74842abc94a979776c
 class App extends Component {
   constructor(){
     super()
@@ -19,11 +24,14 @@ class App extends Component {
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
+  //REMOVE NAVIGATION - JUST HERE FOR DEV
 
+  //FIGURE OUT HOW TO TOGGLE NAVIGATION ON AND OFF
   render() {
     return (
       <Router>
         <div className="App">
+<<<<<<< HEAD
           <Route path='/:signIn' component={SignIn}/>
           <Route path='/:signUp' component={SignUp}/>
           <Route path='/:gettingStarted' component={GettingStarted}/>
@@ -35,6 +43,22 @@ class App extends Component {
           <Route path='/' component={ScheduleDashboard}/>
           <Route path='/:editSchedule' component={EditSchedule}/>
           <Route path='/:upcomingWeek' component={UpcomingWeek}/>
+=======
+          <Route path='/signIn' component={SignIn}/>
+          <Route path='/signUp' component={SignUp}/>
+          <Route exact path='/gettingStarted' component={GettingStarted}/>
+          <Route exact path='/scheduleType' component={ScheduleType}/>
+          <Route exact path='/arrivalTime' component={ArrivalTime}/>
+
+
+          <Route exact path='/configuring' component={Configuring}/>
+          <Route path='/inProgressSchedule' component={InProgressSchedule}/>
+          <Route path='/myProfile' component={MyProfile}/>
+          <Route path='/scheduleDashboard' component={ScheduleDashboard}/>
+          <Route path='/editSchedule' component={EditSchedule}/>
+          <Route path='/upcomingWeek' component={UpcomingWeek}/>
+          <Route path='/navigation' component={Navigation}/>
+>>>>>>> 1cfa09bba791836d4aea5f74842abc94a979776c
 
         </div>
     </Router>

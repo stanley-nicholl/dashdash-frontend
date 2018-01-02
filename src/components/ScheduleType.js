@@ -1,6 +1,7 @@
 import React from 'react'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
-const ScheduleType = () => {
+const ScheduleType = ({match}) => {
 
   return (
     <div className="body">
@@ -16,8 +17,11 @@ const ScheduleType = () => {
         </label>
       </div>
       <div className="footer-container py-3">
-        <h4 className="font-weight-bold mt-1">NEXT ></h4>
+        <Link to={'/arrivalTime'}>
+          <h4 className="font-weight-bold mt-1">NEXT ></h4>
+        </Link>
       </div>
+
     </div>
   )
 }
