@@ -38,7 +38,7 @@ const SignUp = ({ functions: signUp }) => {
               </div>
             </form>
             <div className="col-md-12">
-              <p className="font-small white-text d-flex justify-content-end signin-link">Have an account? <a href="#" className="orange-text ml-1 font-bold"> <Link to={'/signIn'}>Sign In</Link></a></p>
+              <p className="font-small white-text d-flex justify-content-end signin-link">Have an account? <Link to={'/signIn'} className="orange-text ml-1 font-bold">Sign In</Link></p>
             </div>
           </div>
         </div>
