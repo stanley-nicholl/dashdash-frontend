@@ -17,7 +17,9 @@ import Navigation from './components/common-elements/Navigation'
 class App extends Component {
   constructor(){
     super()
-    this.state = { }
+    this.state = {
+      
+    }
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
@@ -30,12 +32,10 @@ class App extends Component {
         <div className="App">
           <Route path='/signIn' component={SignIn}/>
           <Route path='/signUp' component={SignUp}/>
-          <Route exact path='/gettingStarted' component={GettingStarted}/>
-          <Route exact path='/scheduleType' component={ScheduleType}/>
-          <Route exact path='/arrivalTime' component={ArrivalTime}/>
-
-
-          <Route exact path='/configuring' component={Configuring}/>
+          <Route path='/gettingStarted' component={GettingStarted}/>
+          <Route path='/scheduleType' component={ScheduleType}/>
+          <Route path='/arrivalTime' component={ArrivalTime}/>
+          <Route path='/configuring' component={Configuring}/>
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
           <Route path='/scheduleDashboard' component={ScheduleDashboard}/>

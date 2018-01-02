@@ -204,6 +204,20 @@
   border: #13293D;
 }
 
+.next-btn{
+  color: #13293D;
+}
+
+.add-btn-contain{
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1rem;
+}
+
+.add-btn{
+  background-color: #13293D;
+}
+
 /* NAVIGATION NAVIGATION NAVIGATION */
 
 .navigation{

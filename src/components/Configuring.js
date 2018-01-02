@@ -8,7 +8,7 @@ const Configuring = () => {
       <h2 className="py-4 mb-4 title font-weight-bold">building schedule</h2>
       <img className="loading" src="./img/branding/loading-orange.svg" />
       <div className="py-3">
-        <h4 className="font-weight-bold mt-1">. . .</h4>
+        <h4 className="font-weight-bold mt-1">configuring. . .</h4>
       </div>
     </div>
   )
