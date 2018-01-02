@@ -17,7 +17,9 @@ import Navigation from './components/common-elements/Navigation'
 class App extends Component {
   constructor(){
     super()
-    this.state = { }
+    this.state = {
+      
+    }
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
