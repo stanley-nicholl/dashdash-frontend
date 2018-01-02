@@ -1,7 +1,8 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
+import NextButton from './common-elements/NextButton'
 
-const ArrivalTime = ({match}) => {
+const ArrivalTime = () => {
 
   // need to add component did mount and change to class
   // Time Picker Initialization
@@ -23,7 +24,7 @@ const ArrivalTime = ({match}) => {
 
       <div className="footer-container py-3">
         <Link to={'/configuring'}>
-          <h4 className="font-weight-bold mt-1">NEXT ></h4>
+          <NextButton />
         </Link>
       </div>
     </div>
