@@ -96,6 +96,22 @@
 
 /*COMMON COMPONENTS COMMON COMPONENTS*/
 
+.dash-header{
+  width: 100vw;
+  background-color: #F0A202;
+  color: #1C77C3
+}
+
+.dash-header-content{
+  flex-grow: 2;
+}
+
+.ScheduleDashboard{
+  color: #1C77C3;
+  background-color: #D3D4D9;
+
+}
+
 .footer-container{
   background-color: #F0A202;
   color: #13293D;

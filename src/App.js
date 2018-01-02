@@ -12,7 +12,6 @@ import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
 import ScheduleDashboard from './components/ScheduleDashboard'
 import InProgressSchedule from './components/InProgressSchedule'
-
 class App extends Component {
   constructor(){
     super()
@@ -29,13 +28,14 @@ class App extends Component {
           <Route path='/:signUp' component={SignUp}/>
           <Route path='/:gettingStarted' component={GettingStarted}/>
           <Route path='/:scheduleType' component={ScheduleType}/>
-          <Route path='/' component={ArrivalTime}/>
+          <Route path='/:arrivalTime' component={ArrivalTime}/>
           <Route path='/:configuring' component={Configuring}/>
           <Route path='/:inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/:myProfile' component={MyProfile}/>
-          <Route path='/:scheduleDashboard' component={ScheduleDashboard}/>
+          <Route path='/' component={ScheduleDashboard}/>
           <Route path='/:editSchedule' component={EditSchedule}/>
           <Route path='/:upcomingWeek' component={UpcomingWeek}/>
+
         </div>
     </Router>
     );
