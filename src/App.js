@@ -45,7 +45,7 @@ class App extends Component {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
   }
 
-  // GET USER DATA
+  // GET USER DATA (USER & PLANS)
   fetchUserData = async (token) => {
     // get user data from API
     const userDataResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/users/fromToken`, {
@@ -56,7 +56,16 @@ class App extends Component {
     if (userDataResponse.status !== 200) return null // user does not exist on server
     const userDataJSON = await userDataResponse.json()
     const { id: userId, first_name: firstname, last_name: lastname, email, children, pets } = userDataJSON.User
-    return { userId, firstname, lastname, email, children, pets }
+    // get plans from API
+    const plansDataResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/users/${userId}`, {
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    })
+    const plansDataJSON = await plansDataResponse.json()
+    const plans = plansDataJSON.Plans
+    // return user with plans
+    return { userId, firstname, lastname, email, children, pets, plans }
   } 
 
   // SIGNUP
