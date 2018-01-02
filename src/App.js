@@ -16,7 +16,14 @@ import InProgressSchedule from './components/InProgressSchedule'
 class App extends Component {
   constructor(){
     super()
-    this.state = { }
+    this.state = { 
+      userToken: null,
+      user: null
+    }
+  }
+
+  componentDidMount() {
+
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
