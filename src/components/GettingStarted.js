@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
+import NextButton from './common-elements/NextButton'
 
 const GettingStarted = () => {
 
@@ -29,7 +30,7 @@ const GettingStarted = () => {
       </div>
       <div className="footer-container py-3">
         <Link to={'/scheduleType'}>
-          <h4 className="font-weight-bold mt-1">NEXT ></h4>
+          <NextButton />
         </Link>
       </div>
     </div>
