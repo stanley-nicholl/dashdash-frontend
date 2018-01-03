@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
-const SignUp = ({ functions: signUp }) => {
+const SignUp = ({ functions: signup }) => {
 
   return (
     <div>
@@ -33,7 +33,7 @@ const SignUp = ({ functions: signUp }) => {
               </div>
               <div className="row d-flex align-items-center mb-4">
                 <div className="text-center mb-3 col-md-12">
-                  <button type="button" onClick={signUp} className="btn blue darken-2 btn-block btn-rounded z-depth-1">Sign up</button>
+                  <button type="button" onClick={signup} className="btn blue darken-2 btn-block btn-rounded z-depth-1">Sign up</button>
                 </div>
               </div>
             </form>
