@@ -44,8 +44,8 @@ class SignUp extends Component {
       // save to local storage & state
       localStorage.setItem('dashdashUserToken', userToken)
       saveAppState({ userToken, ...user })
-      // advance to scheduleDashboard
-      setTimeout(() => this.props.history.push('/'), 1000)
+      // advance to gettingStarted
+      setTimeout(() => this.props.history.push('/gettingStarted'), 1000)
     }
   }
 
