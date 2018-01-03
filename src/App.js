@@ -42,9 +42,18 @@ class App extends Component {
     }
   }
 
-  updateNewScheduleData = (kids, pets) => {
+  updateNewScheduleKidsPetsData = (kids, pets) => {
     this.setState({children: kids, pets: pets})
   }
+
+  updateNewScheduleTypeData = (type) => {
+    console.log(type);
+    this.setState({newScheduleType: type})
+  }
+
+  // updateNewScheduleKidsPetsData = (kids, pets) => {
+  //   this.setState({children: kids, pets: pets})
+  // }
 
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
@@ -169,11 +178,8 @@ class App extends Component {
         <div className="App">
           <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
           <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
-
-
-
-          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleData= {this.updateNewScheduleData} />}/>
-          <Route exact path='/scheduleType' component={ScheduleType}/>
+          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
+          <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
           <Route exact path='/arrivalTime' component={ArrivalTime}/>
           <Route exact path='/configuring' component={Configuring}/>
           <Route path='/createSchedule' component={CreateSchedule}/>

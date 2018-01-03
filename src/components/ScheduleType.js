@@ -2,7 +2,17 @@ import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import NextButton from './common-elements/NextButton'
 
-const ScheduleType = () => {
+const ScheduleType = ({updateNewScheduleTypeData}) => {
+
+  const grabData = () => {
+    const scheduleType = document.getElementById('scheduleType').checked
+    if(scheduleType){
+      updateNewScheduleTypeData('weekend');
+    }else{
+      updateNewScheduleTypeData('weekday');
+    }
+
+  }
 
   return (
     <div className="body">
@@ -12,13 +22,13 @@ const ScheduleType = () => {
       <div className="switch">
         <label>
           weekday
-          <input type="checkbox"/>
+          <input type="checkbox" id="scheduleType"/>
           <span className="lever"></span>
           weekend
         </label>
       </div>
       <div className="footer-container py-3">
-        <Link to={'/arrivalTime'}>
+        <Link to={'/arrivalTime'} onClick={ e => grabData() }>
           <NextButton />
         </Link>
       </div>

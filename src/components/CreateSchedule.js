@@ -1,71 +1,105 @@
-import React from 'react'
+import React, { Component } from 'react';
 import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 import AddNewButton from './common-elements/AddNewButton'
+import CreatePlanItem from './common-elements/CreatePlanItem'
 
-const EditSchedule = () => {
+class CreateSchedule extends Component{
+  constructor(){
+    super()
+    this.state ={
+      templateName: null,
+      templateId: null,
+      templateItems: []
+    }
+  }
 
-  return (
-    <div className="body">
-      <div className="d-flex title align-items-center justify-content-center">
-        <h3 className="py-4 title font-weight-bold">weekday schedule</h3>
-        <img className="edit-img pl-1 mb-2" src="./img/branding/edit-white.svg" />
-      </div>
-      <div className="container">
-        <div className="days d-flex justify-content-around my-3">
-          <DayOfWeekBtn day="Su"/>
-          <DayOfWeekBtn day="M"/>
-          <DayOfWeekBtn day="T"/>
-          <DayOfWeekBtn day="W"/>
-          <DayOfWeekBtn day="Th"/>
-          <DayOfWeekBtn day="F"/>
-          <DayOfWeekBtn day="S"/>
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+  }
+
+  async componentDidMount() {
+    const template = await this.getTemplateData()
+    const templateItems = await this.getTemplateItems()
+    console.log(templateItems);
+    this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
+  }
+
+  //get template data
+  getTemplateData =  async () => {
+    const templateData = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/2`)
+    const template = await templateData.json()
+    return template
+  }
+
+  //get template items DATA
+  getTemplateItems = async () => {
+    const templateDataItems = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/2/items`)
+    const templateItems = await templateDataItems.json()
+    return templateItems
+  }
+
+
+  render(){
+    const array = [
+      {id:1, name: 'shower', duration: 10, skippable: false},
+      {id:2, name: 'get dressed', duration: 10, skippable: false},
+      {id:3, name: 'drink coffee', duration: 4, skippable: true},
+      {id:4, name: 'make breakfast', duration: 15, skippable: false},
+      {id:5, name: 'read the paper', duration: 15, skippable: true},
+      {id:6, name: 'watch news', duration: 4, skippable: true},
+      {id:7, name: 'commute', duration: 10, skippable: false}
+    ]
+    let test = null;
+    if(this.state.templateId){
+      console.log('win');
+      test = this.state.templateItems
+    }else{
+      test = array
+    }
+
+
+
+    return (
+      <div className="body">
+        <div className="d-flex title align-items-center justify-content-center">
+          <h3 className="py-4 title font-weight-bold">weekday schedule</h3>
+          <img className="edit-img pl-1 mb-2" src="./img/branding/edit-white.svg" />
         </div>
-      </div>
-      <div className="plan-items d-flex flex-column align-items-center">
-        <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
-          <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
-          <p className="col-6 my-0 pl-0 text-left item-name">shower</p>
-          <img className="skippable-img pl-2 pr-2 col-2" src="./img/branding/skip-white.svg" />
-          <div className="md-form col-2 my-0 px-2">
-            <input defaultValue="10" type="text" id="form1" class="form-control"/>
-            <label htmlFor="form1"></label>
+        <div className="container">
+          <div className="days d-flex justify-content-around my-3">
+            <DayOfWeekBtn day="Su"/>
+            <DayOfWeekBtn day="M"/>
+            <DayOfWeekBtn day="T"/>
+            <DayOfWeekBtn day="W"/>
+            <DayOfWeekBtn day="Th"/>
+            <DayOfWeekBtn day="F"/>
+            <DayOfWeekBtn day="S"/>
           </div>
         </div>
-      </div>
 
-      <div className="plan-items d-flex flex-column align-items-center">
-        <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
-          <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
-          <p className="col-6 my-0 pl-0 text-left item-name">get dressed</p>
-          <img className="skippable-img pl-2 pr-2 col-2" src="./img/branding/skip-white.svg" />
-          <div className="md-form col-2 my-0 px-2">
-            <input defaultValue="5" type="text" id="form1" class="form-control"/>
-            <label htmlFor="form1"></label>
-          </div>
+        {test.map(item => {
+          return <CreatePlanItem item={item} key={item.id} />
+        })}
+        <div className="add-btn-contain">
+          <AddNewButton />
+        </div>
+
+        <div className="footer-container py-3">
+          <h4 className="font-weight-bold mt-1">SAVE ></h4>
         </div>
       </div>
-
-      <div className="plan-items d-flex flex-column align-items-center">
-        <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
-          <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
-          <p className="col-6 my-0 pl-0 text-left item-name">grab coffee and breakfast</p>
-          <img className="col-2" />
-          <div className="md-form col-2 my-0 px-2">
-            <input defaultValue="15" type="text" id="form1" class="form-control"/>
-            <label htmlFor="form1"></label>
-          </div>
-        </div>
-      </div>
-
-      <div className="add-btn-contain">
-        <AddNewButton />
-      </div>
-
-      <div className="footer-container py-3">
-        <h4 className="font-weight-bold mt-1">SAVE ></h4>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default EditSchedule
+export default CreateSchedule
