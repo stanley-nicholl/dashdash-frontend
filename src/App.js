@@ -7,7 +7,6 @@ import GettingStarted from './components/GettingStarted'
 import ScheduleType from './components/ScheduleType'
 import ArrivalTime from './components/ArrivalTime'
 import Configuring from './components/Configuring'
-import CreateSchedule from './components/CreateSchedule'
 import EditSchedule from './components/EditSchedule'
 import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
@@ -18,7 +17,7 @@ import Navigation from './components/common-elements/Navigation'
 class App extends Component {
   constructor(){
     super()
-    this.state = { 
+    this.state = {
       userToken: localStorage.getItem('dashdashUserToken'),
       userId: null,
       firstname: null,
@@ -46,6 +45,8 @@ class App extends Component {
     }
   }
 
+<<<<<<< HEAD
+=======
   updateNewScheduleKidsPetsData = (kids, pets) => {
     this.setState({children: kids, pets: pets})
   }
@@ -59,6 +60,7 @@ class App extends Component {
   //   this.setState({children: kids, pets: pets})
   // }
 
+>>>>>>> c15da8d756dafe44d1ff85a39c097e20c2234375
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
     if (window.location.pathname === '/signIn') return false //do not rerender when saving state on signIn page
@@ -187,12 +189,14 @@ class App extends Component {
           <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
           <Route exact path='/arrivalTime' component={ArrivalTime}/>
+
+
           <Route exact path='/configuring' component={Configuring}/>
-          <Route path='/createSchedule' component={CreateSchedule}/>
-          <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
-          <Route path='/scheduleDashboard' component={ScheduleDashboard}/>
+
+          <Route path='/scheduleDashboard' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
+          <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/upcomingWeek' component={UpcomingWeek}/>
           <Route path='/navigation' component={Navigation}/>
 
