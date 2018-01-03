@@ -3,10 +3,11 @@ import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 class Configuring extends Component{
   componentDidMount = () => {
-    setTimeout( () => { window.location.pathname = '/createSchedule' }, 3000);
+    setTimeout( () => { this.props.history.push('/createSchedule') }, 3000);
   }
 
   render () {
+    console.log(this.props.history);
     return (
       <div className="body d-flex flex-column justify-content-between">
         <h2 className="py-4 mb-4 title font-weight-bold">building schedule</h2>

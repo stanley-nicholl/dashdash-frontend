@@ -5,13 +5,20 @@ import CreatePlanItem from './common-elements/CreatePlanItem'
 // import CreatePlanModal from './common-elements/CreatePlanModal'
 
 class CreateSchedule extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
+    // const {children, pets, newScheduleType, newDaysOfTheWeek} = this.props
+
     this.state ={
       templateName: null,
       templateId: null,
-      templateItems: []
+      templateItems: [],
+      scheduleType: this.props.test.newScheduleType,
+      newArrivalTime: this.props.test.newArrivalTime,
+      pets: this.props.test.pets,
+      children: this.props.test.children
     }
+    console.log(this.state);
   }
 
   //draggable interaction for reordering the items
@@ -62,20 +69,19 @@ class CreateSchedule extends Component{
       {id:6, name: 'watch news', duration: 4, skippable: true},
       {id:7, name: 'commute', duration: 10, skippable: false}
     ]
-    let test = null;
+
+    //either populating above dummy data or if api call is complete, the template items
+    let itemData = null;
     if(this.state.templateId){
-      console.log('win');
-      test = this.state.templateItems
+      itemData = this.state.templateItems
     }else{
-      test = array
+      itemData = array
     }
-
-
 
     return (
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
-          <h3 className="py-4 title font-weight-bold">weekday schedule</h3>
+          <h3 className="py-4 title font-weight-bold">{this.state.scheduleType}</h3>
           <img className="edit-img pl-1 mb-2" src="./img/branding/edit-white.svg" />
         </div>
         <div className="container">
@@ -90,7 +96,7 @@ class CreateSchedule extends Component{
           </div>
         </div>
 
-        {test.map(item => {
+        {itemData.map(item => {
           return <CreatePlanItem item={item} key={item.id} />
         })}
         <div className="add-btn-contain">
