@@ -2,12 +2,12 @@ import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import NextButton from './common-elements/NextButton'
 
-const GettingStarted = () => {
+const GettingStarted = ({updateNewScheduleData}) => {
 
-  const grabData = (e) => {
-    const kids = document.getElementById('kids')
-    const pets = document.getElementById('pets')
-    console.log(kids.checked, pets.checked);
+  const grabData = () => {
+    const kids = document.getElementById('kids').checked
+    const pets = document.getElementById('pets').checked
+    updateNewScheduleData(kids, pets);
   }
 
   return (
@@ -36,7 +36,7 @@ const GettingStarted = () => {
           </label>
         </div>
         <div className="footer-container py-3">
-          <Link to={'/scheduleType'} onClick={e => grabData(e)}>
+          <Link to={'/scheduleType'} onClick={ e => grabData() }>
             <NextButton />
           </Link>
         </div>

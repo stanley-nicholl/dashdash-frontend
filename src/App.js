@@ -7,6 +7,7 @@ import GettingStarted from './components/GettingStarted'
 import ScheduleType from './components/ScheduleType'
 import ArrivalTime from './components/ArrivalTime'
 import Configuring from './components/Configuring'
+import CreateSchedule from './components/CreateSchedule'
 import EditSchedule from './components/EditSchedule'
 import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
@@ -17,7 +18,7 @@ import Navigation from './components/common-elements/Navigation'
 class App extends Component {
   constructor(){
     super()
-    this.state = { 
+    this.state = {
       userToken: null,
       userId: null,
       firstname: null,
@@ -26,7 +27,7 @@ class App extends Component {
       children: null,
       pets: null,
       plans: [],
-      newScheduleType: null, 
+      newScheduleType: null,
       newDaysOfTheWeek: null
     }
   }
@@ -39,6 +40,10 @@ class App extends Component {
       // if user exists, save user data to state
       if (user) this.setState({ userToken, ...user })
     }
+  }
+
+  updateNewScheduleData = (kids, pets) => {
+    this.setState({children: kids, pets: pets})
   }
 
   shouldComponentUpdate() {
@@ -66,7 +71,7 @@ class App extends Component {
     const plans = plansDataJSON.Plans
     // return user with plans
     return { userId, firstname, lastname, email, children, pets, plans }
-  } 
+  }
 
   // SIGNUP
   signUp = async () => {
@@ -121,18 +126,17 @@ class App extends Component {
         <div className="App">
           <Route path='/signIn' component={SignIn}/>
           <Route path='/signUp' component={ () => <SignUp functions={ this.signUp } /> } />
-          
 
-          <Route exact path='/gettingStarted' component={GettingStarted}/>
+
+          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleData= {this.updateNewScheduleData} />}/>
           <Route exact path='/scheduleType' component={ScheduleType}/>
           <Route exact path='/arrivalTime' component={ArrivalTime}/>
-
-
           <Route exact path='/configuring' component={Configuring}/>
+          <Route path='/createSchedule' component={CreateSchedule}/>
+          <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
           <Route path='/scheduleDashboard' component={ScheduleDashboard}/>
-          <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/upcomingWeek' component={UpcomingWeek}/>
           <Route path='/navigation' component={Navigation}/>
 
