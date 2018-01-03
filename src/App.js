@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
 import './App.css';
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -18,7 +18,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = { 
-      userToken: null,
+      userToken: localStorage.getItem('dashdashUserToken'),
       userId: null,
       firstname: null,
       lastname: null,
@@ -33,11 +33,15 @@ class App extends Component {
 
   componentDidMount = async () => {
     // check for previously logged in user
-    const userToken = localStorage.getItem('dashdashUserToken')
-    if (userToken) {
-      const user = await this.fetchUserData(userToken)
+    if (this.state.userToken) {
+      const user = await this.fetchUserData(this.state.userToken)
+      // if user does not exist, they have been deleted/disabled on the API, so remove local token
+      if (!user) {
+        localStorage.removeItem('dashdashUserToken')
+        this.setState({ userToken: null })
+      }
       // if user exists, save user data to state
-      if (user) this.setState({ userToken, ...user })
+      else this.setState({ ...user })
     }
   }
 
@@ -162,6 +166,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          { this.state.userToken ? <Redirect push to='/scheduleDashboard' /> : <Redirect push to='/signIn' /> }
+
           <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
           <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
           
@@ -181,9 +187,9 @@ class App extends Component {
 
         </div>
     </Router>
-    );
+    )
   }
 
 }
 
-export default App;
+export default App
