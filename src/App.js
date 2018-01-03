@@ -174,7 +174,8 @@ class App extends Component {
           <Route exact path='/configuring' component={Configuring}/>
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
-          <Route path='/scheduleDashboard' component={()=> <ScheduleDashboard plans={this.state.plans} />}/>
+
+          <Route path='/scheduleDashboard' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
           <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/upcomingWeek' component={UpcomingWeek}/>
           <Route path='/navigation' component={Navigation}/>
