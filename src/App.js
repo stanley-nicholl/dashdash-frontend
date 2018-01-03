@@ -48,6 +48,8 @@ class App extends Component {
 
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
+    if (window.location.pathname === '/signIn') return false //do not rerender when saving state on signIn page
+    return true
   }
 
   // GET USER DATA (USER & PLANS)
@@ -74,7 +76,7 @@ class App extends Component {
   }
 
   // SIGNUP
-  signUp = async () => {
+  signup = async () => {
     // clear prior error message
     const signupMessagebox = document.querySelector('#signup-messagebox')
     signupMessagebox.innerHTML = ''
@@ -116,6 +118,47 @@ class App extends Component {
     }
   }
 
+  // SIGNIN
+  signin = async () => {
+    // clear prior error message
+    const signinMessagebox = document.querySelector('#signin-messagebox')
+    signinMessagebox.innerHTML = ''
+    // get form values
+    const email = document.querySelector('#signin-email').value
+    const password = document.querySelector('#signin-password').value
+    // send POST data to API
+    const signinResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/auth/login`, {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const signinJSON = await signinResponse.json()
+    // check for error
+    if (signinResponse.status !== 200) {
+      signinMessagebox.innerHTML = `
+        <div>
+          ${signinJSON.message}
+        </div>
+      `
+    } else {
+      // get user data from API
+      const userToken = signinJSON.Auth
+      const user = await this.fetchUserData(userToken)
+      // display success message
+      signinMessagebox.innerHTML = `
+        <div>
+          Welcome back, ${user.firstname}!
+        </div>
+      `
+      // save to local storage & state
+      localStorage.setItem('dashdashUserToken', userToken)
+      this.setState({ userToken, ...user })
+    }
+  }
+
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
   //REMOVE NAVIGATION - JUST HERE FOR DEV
 
@@ -124,8 +167,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route path='/signIn' component={SignIn}/>
-          <Route path='/signUp' component={ () => <SignUp functions={ this.signUp } /> } />
+          <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
+          <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
+
 
 
           <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleData= {this.updateNewScheduleData} />}/>
