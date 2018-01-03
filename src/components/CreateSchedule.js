@@ -62,7 +62,7 @@ const EditSchedule = () => {
       </div>
 
       <div className="footer-container py-3">
-        <h4 className="font-weight-bold mt-1">UPDATE ></h4>
+        <h4 className="font-weight-bold mt-1">SAVE ></h4>
       </div>
     </div>
   )

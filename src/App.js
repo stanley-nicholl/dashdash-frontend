@@ -162,15 +162,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-<<<<<<< HEAD
-          <Route path='/signIn' component={SignIn}/>
-          <Route path='/signUp' component={ () => <SignUp functions={ this.signUp } /> } />
-
-=======
           <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
           <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
-          
->>>>>>> d2a240976b0b6b9f465f3cac06e743795b41ee82
+
 
           <Route exact path='/gettingStarted' component={GettingStarted}/>
           <Route exact path='/scheduleType' component={ScheduleType}/>
