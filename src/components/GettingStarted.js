@@ -2,12 +2,12 @@ import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import NextButton from './common-elements/NextButton'
 
-const GettingStarted = ({updateNewScheduleData}) => {
+const GettingStarted = ({updateNewScheduleKidsPetsData}) => {
 
   const grabData = () => {
     const kids = document.getElementById('kids').checked
     const pets = document.getElementById('pets').checked
-    updateNewScheduleData(kids, pets);
+    updateNewScheduleKidsPetsData(kids, pets);
   }
 
   return (
