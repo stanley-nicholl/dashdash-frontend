@@ -4,12 +4,16 @@
 /*font-family: 'Montserrat', sans-serif;*/
 
 /*FONTS FONTS FONTS*/
+/* body{
+  background-color: #EAEBED;
+} */
 
 .body{
   font-family: 'Montserrat', sans-serif;
   color: #1C77C3;
   background-color: #EAEBED;
-  height: 100vh;
+  min-height: 100vh;
+  margin-bottom: 2rem;
 }
 
 .title{
@@ -109,7 +113,16 @@
   color: #F0A202;
 }
 
+/*CREATE/EDIT DASHBOARD*/
 
+.item-section{
+  padding-bottom: 5rem;
+}
+
+/* .buffer{
+  height: 5rem;
+  background-color:
+} */
 
 
 /*COMMON STYLING COMMON STYLING*/
@@ -148,8 +161,7 @@
   position: fixed;
   bottom: 0;
   width: 100vw;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+
 }
 
 .footer-icon{

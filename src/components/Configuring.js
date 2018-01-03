@@ -7,7 +7,6 @@ class Configuring extends Component{
   }
 
   render () {
-    console.log(this.props.history);
     return (
       <div className="body d-flex flex-column justify-content-between">
         <h2 className="py-4 mb-4 title font-weight-bold">building schedule</h2>

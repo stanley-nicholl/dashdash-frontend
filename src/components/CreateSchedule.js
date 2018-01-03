@@ -18,7 +18,6 @@ class CreateSchedule extends Component{
       pets: this.props.test.pets,
       children: this.props.test.children
     }
-    console.log(this.state);
   }
 
   //draggable interaction for reordering the items
@@ -38,22 +37,57 @@ class CreateSchedule extends Component{
 
   //set state after async API call
   async componentDidMount() {
-    const template = await this.getTemplateData()
-    const templateItems = await this.getTemplateItems()
-    console.log(templateItems);
+    //figure which template to load
+    let target = this.findTemplate()
+    const template = await this.getTemplateData(target)
+    const templateItems = await this.getTemplateItems(target)
     this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
   }
 
+  findTemplate = () => {
+    let target = null
+    if(this.state.children){
+      if(this.state.pets){
+        if(this.state.scheduleType === 'weekday'){
+          target = 1
+        }else{
+          target = 5
+        }
+      }else{
+        if(this.state.scheduleType === 'weekday'){
+          target = 2
+        }else{
+          target = 6
+        }
+      }
+    }else{
+      if(this.state.pets){
+        if(this.state.scheduleType === 'weekday'){
+          target = 3
+        }else{
+          target = 7
+        }
+      }else{
+        if(this.state.scheduleType === 'weekday'){
+          target = 4
+        }else{
+          target = 8
+        }
+      }
+    }
+    return target
+  }
+
   //get template data
-  getTemplateData =  async () => {
-    const templateData = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/2`)
+  getTemplateData =  async (target) => {
+    const templateData = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}`)
     const template = await templateData.json()
     return template
   }
 
   //get template items DATA
-  getTemplateItems = async () => {
-    const templateDataItems = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/2/items`)
+  getTemplateItems = async (target) => {
+    const templateDataItems = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
     const templateItems = await templateDataItems.json()
     return templateItems
   }
@@ -61,13 +95,8 @@ class CreateSchedule extends Component{
 
   render(){
     const array = [
-      {id:1, name: 'shower', duration: 10, skippable: false},
-      {id:2, name: 'get dressed', duration: 10, skippable: false},
-      {id:3, name: 'drink coffee', duration: 4, skippable: true},
-      {id:4, name: 'make breakfast', duration: 15, skippable: false},
-      {id:5, name: 'read the paper', duration: 15, skippable: true},
-      {id:6, name: 'watch news', duration: 4, skippable: true},
-      {id:7, name: 'commute', duration: 10, skippable: false}
+      {id:1, name: '', duration: 0, skippable: false},
+
     ]
 
     //either populating above dummy data or if api call is complete, the template items
@@ -82,7 +111,7 @@ class CreateSchedule extends Component{
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
           <h3 className="py-4 title font-weight-bold">{this.state.scheduleType}</h3>
-          <img className="edit-img pl-1 mb-2" src="./img/branding/edit-white.svg" />
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg" />
         </div>
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
@@ -95,10 +124,16 @@ class CreateSchedule extends Component{
             <DayOfWeekBtn day="S"/>
           </div>
         </div>
+        <div className="d-flex justify-content-center">
+          <h2 onClick={ e => {'test'}}>{this.state.newArrivalTime}</h2>
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-blue.svg" />
+        </div>
 
-        {itemData.map(item => {
-          return <CreatePlanItem item={item} key={item.id} />
-        })}
+        <div className="item-section">
+          {itemData.map(item => {
+            return <CreatePlanItem item={item} key={item.id} />
+          })}
+        </div>
         <div className="add-btn-contain">
           <AddNewButton />
         </div>
