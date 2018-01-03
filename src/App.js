@@ -7,6 +7,7 @@ import GettingStarted from './components/GettingStarted'
 import ScheduleType from './components/ScheduleType'
 import ArrivalTime from './components/ArrivalTime'
 import Configuring from './components/Configuring'
+import CreateSchedule from './components/CreateSchedule'
 import EditSchedule from './components/EditSchedule'
 import UpcomingWeek from './components/UpcomingWeek'
 import MyProfile from './components/MyProfile'
@@ -27,7 +28,9 @@ class App extends Component {
       pets: null,
       plans: [],
       newScheduleType: null,
-      newDaysOfTheWeek: null
+      editDaysOfTheWeek: null,
+      newArrivalTime: '9:00 AM',
+      editArrivalTime: null
     }
   }
 
@@ -45,8 +48,6 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
   updateNewScheduleKidsPetsData = (kids, pets) => {
     this.setState({children: kids, pets: pets})
   }
@@ -60,7 +61,6 @@ class App extends Component {
   //   this.setState({children: kids, pets: pets})
   // }
 
->>>>>>> c15da8d756dafe44d1ff85a39c097e20c2234375
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
     if (window.location.pathname === '/signIn') return false //do not rerender when saving state on signIn page
@@ -179,22 +179,28 @@ class App extends Component {
 
   //FIGURE OUT HOW TO TOGGLE NAVIGATION ON AND OFF
   render() {
+    const obj = {
+      children: this.state.children,
+      pets: this.state.pets,
+      newScheduleType: this.state.newScheduleType,
+      newArrivalTime: this.state.newArrivalTime
+    }
     return (
       <Router>
         <div className="App">
-          { this.state.userToken ? <Redirect push to='/scheduleDashboard' /> : <Redirect push to='/signIn' /> }
+          {/* { this.state.userToken ? <Redirect push to='/scheduleDashboard' /> : <Redirect push to='/signIn' /> } */}
 
           <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
           <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
-          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
-          <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
-          <Route exact path='/arrivalTime' component={ArrivalTime}/>
+          <Route path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
+          <Route path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
+          <Route path='/arrivalTime' component={ArrivalTime}/>
+          <Route path='/configuring' component={Configuring}/>
 
+          <Route path='/createSchedule' component={ () => <CreateSchedule test={obj} />} />
 
-          <Route exact path='/configuring' component={Configuring}/>
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
-
           <Route path='/scheduleDashboard' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
           <Route path='/editSchedule' component={EditSchedule}/>
           <Route path='/upcomingWeek' component={UpcomingWeek}/>
