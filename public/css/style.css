@@ -98,10 +98,16 @@
 
 /*Schedule Dashboard Schedule Dashboard*/
 
-.ScheduleDashboard{
-
+.scheduleTile{
+  background-color: #13293D;
+  color: gray;
 }
 
+.tiles{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #F0A202;
+}
 
 
 

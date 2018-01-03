@@ -45,8 +45,6 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
   updateNewScheduleKidsPetsData = (kids, pets) => {
     this.setState({children: kids, pets: pets})
   }
@@ -60,7 +58,6 @@ class App extends Component {
   //   this.setState({children: kids, pets: pets})
   // }
 
->>>>>>> c15da8d756dafe44d1ff85a39c097e20c2234375
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
     if (window.location.pathname === '/signIn') return false //do not rerender when saving state on signIn page
