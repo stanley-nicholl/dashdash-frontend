@@ -89,88 +89,9 @@ class App extends Component {
     return { userId, firstname, lastname, email, children, pets, plans }
   }
 
-  // SIGNUP
-  signup = async () => {
-    // clear prior error message
-    const signupMessagebox = document.querySelector('#signup-messagebox')
-    signupMessagebox.innerHTML = ''
-    // get form values
-    const firstname = document.querySelector('#signup-firstname').value
-    const lastname = document.querySelector('#signup-lastname').value
-    const email = document.querySelector('#signup-email').value
-    const password = document.querySelector('#signup-password').value
-    // send POST data to API
-    const signupResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/auth/signup`, {
-      method: 'POST',
-      body: JSON.stringify({ first_name: firstname, last_name: lastname, email, password }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    const signupJSON = await signupResponse.json()
-    // check for error
-    if (signupResponse.status !== 201) {
-      signupMessagebox.innerHTML = `
-        <div>
-          ${signupJSON.message}
-        </div>
-      `
-    } else {
-      // display success message
-      signupMessagebox.innerHTML = `
-        <div>
-          Welcome to DashDash, ${firstname}!
-        </div>
-      `
-      // get user data from API
-      const userToken = signupJSON.Auth
-      const user = await this.fetchUserData(userToken)
-      // save to local storage & state
-      localStorage.setItem('dashdashUserToken', userToken)
-      this.setState({ userToken, ...user })
-    }
-  }
-
-  // SIGNIN
-  signin = async () => {
-    // clear prior error message
-    const signinMessagebox = document.querySelector('#signin-messagebox')
-    signinMessagebox.innerHTML = ''
-    // get form values
-    const email = document.querySelector('#signin-email').value
-    const password = document.querySelector('#signin-password').value
-    // send POST data to API
-    const signinResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/auth/login`, {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    const signinJSON = await signinResponse.json()
-    // check for error
-    if (signinResponse.status !== 200) {
-      signinMessagebox.innerHTML = `
-        <div>
-          ${signinJSON.message}
-        </div>
-      `
-    } else {
-      // get user data from API
-      const userToken = signinJSON.Auth
-      const user = await this.fetchUserData(userToken)
-      // display success message
-      signinMessagebox.innerHTML = `
-        <div>
-          Welcome back, ${user.firstname}!
-        </div>
-      `
-      // save to local storage & state
-      localStorage.setItem('dashdashUserToken', userToken)
-      this.setState({ userToken, ...user })
-    }
+  // SET APP STATE FROM SUB-COMPONENTS
+  saveAppState = (data) => {
+    this.setState(data)
   }
 
   //USE LINKS TO DYNAMICALLY CHANGE THE URL (EVEN FOR IMAGES OR BUTTONS)
@@ -187,26 +108,25 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          {/* { this.state.userToken ? <Redirect push to='/scheduleDashboard' /> : <Redirect push to='/signIn' /> } */}
+          { !this.state.userToken ? <Redirect push to='/signIn' /> : null }
 
-          <Route path='/signIn' component={ () => <SignIn functions={ this.signin } /> } />
-          <Route path='/signUp' component={ () => <SignUp functions={ this.signup } /> } />
-          <Route path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
-          <Route path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
-          <Route path='/arrivalTime' component={ArrivalTime}/>
-          <Route path='/configuring' component={Configuring}/>
+          <Route exact path='/signIn' component={ ({ history }) => <SignIn history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+          <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
+          <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
+          <Route exact path='/arrivalTime' component={ArrivalTime}/>
+          <Route exact path='/configuring' component={Configuring}/>
 
-          <Route path='/createSchedule' component={ () => <CreateSchedule test={createScheduleObj} />} />
+          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={createScheduleObj} />} />
 
-          <Route path='/inProgressSchedule' component={InProgressSchedule}/>
-          <Route path='/myProfile' component={MyProfile}/>
-          <Route path='/scheduleDashboard' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
-          <Route path='/editSchedule' component={EditSchedule}/>
-          <Route path='/upcomingWeek' component={UpcomingWeek}/>
-          <Route path='/navigation' component={Navigation}/>
-
+          <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
+          <Route exact path='/myProfile' component={MyProfile}/>
+          <Route exact path='/editSchedule' component={EditSchedule}/>
+          <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
+          <Route exact path='/navigation' component={Navigation}/>
+          <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
-    </Router>
+      </Router>
     )
   }
 
