@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 import AddNewButton from './common-elements/AddNewButton'
 import CreatePlanItem from './common-elements/CreatePlanItem'
+// import CreatePlanModal from './common-elements/CreatePlanModal'
 
 class CreateSchedule extends Component{
   constructor(){
@@ -13,6 +14,7 @@ class CreateSchedule extends Component{
     }
   }
 
+  //draggable interaction for reordering the items
   allowDrop(ev) {
     ev.preventDefault();
   }
@@ -27,6 +29,7 @@ class CreateSchedule extends Component{
       ev.target.appendChild(document.getElementById(data));
   }
 
+  //set state after async API call
   async componentDidMount() {
     const template = await this.getTemplateData()
     const templateItems = await this.getTemplateItems()
@@ -97,6 +100,7 @@ class CreateSchedule extends Component{
         <div className="footer-container py-3">
           <h4 className="font-weight-bold mt-1">SAVE ></h4>
         </div>
+
       </div>
     )
   }

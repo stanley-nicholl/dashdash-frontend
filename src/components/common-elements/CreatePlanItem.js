@@ -1,4 +1,6 @@
 import React from 'react'
+import CreatePlanModal from './CreatePlanModal'
+
 
 const CreatePlanItem = ({item}) => {
 
@@ -7,8 +9,12 @@ const CreatePlanItem = ({item}) => {
     return <img className="col-2" />
   }
 
+  const showModal = (item) => {
+    window.$('#user-modal').modal('toggle')
+  }
+
   return(
-    <div className="plan-items d-flex flex-column align-items-center" draggable="true">
+    <div className="plan-items d-flex flex-column align-items-center" draggable="true" onClick={ e => showModal(item)}>
       <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
         <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
         <p className="col-6 my-0 pl-0 text-left item-name">{item.name}</p>
@@ -18,6 +24,7 @@ const CreatePlanItem = ({item}) => {
           <label htmlFor="form1"></label>
         </div>
       </div>
+      <CreatePlanModal item={item}/>
     </div>
   )
 }
