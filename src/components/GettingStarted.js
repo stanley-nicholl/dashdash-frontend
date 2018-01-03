@@ -4,9 +4,17 @@ import NextButton from './common-elements/NextButton'
 
 const GettingStarted = ({updateNewScheduleKidsPetsData}) => {
 
-  const grabData = () => {
+  //change page
+  // componentDidUpdate(){
+  //   this.props.history.push('/scheduleType')
+  // }
+
+  //will need to be async
+  const grabData =  () => {
     const kids = document.getElementById('kids').checked
     const pets = document.getElementById('pets').checked
+    //post to db kids and pets values
+    //update setState
     updateNewScheduleKidsPetsData(kids, pets);
   }
 

@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   updateNewScheduleTypeData = (type) => {
-    console.log(type);
     this.setState({newScheduleType: type})
   }
 
@@ -100,7 +99,7 @@ class App extends Component {
 
   //FIGURE OUT HOW TO TOGGLE NAVIGATION ON AND OFF
   render() {
-    const obj = {
+    const createScheduleObj = {
       children: this.state.children,
       pets: this.state.pets,
       newScheduleType: this.state.newScheduleType,
@@ -118,7 +117,7 @@ class App extends Component {
           <Route path='/arrivalTime' component={ArrivalTime}/>
           <Route path='/configuring' component={Configuring}/>
 
-          <Route path='/createSchedule' component={ () => <CreateSchedule test={obj} />} />
+          <Route path='/createSchedule' component={ () => <CreateSchedule test={createScheduleObj} />} />
 
           <Route path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route path='/myProfile' component={MyProfile}/>
