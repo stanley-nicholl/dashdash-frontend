@@ -48,7 +48,6 @@ class SignIn extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <section className="form-dark">
