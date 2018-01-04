@@ -3,7 +3,7 @@ import React from 'react'
 const AddNewButton = () => {
   return (
     <div>
-      <a class="btn-floating btn-success add-btn"><i class="fa fa-plus"></i></a>
+      <a className="btn-floating btn-success add-btn"><i className="fa fa-plus"></i></a>
     </div>
   )
 }
