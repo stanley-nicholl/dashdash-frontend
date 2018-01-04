@@ -4,7 +4,7 @@ import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 import AddNewButton from './common-elements/AddNewButton'
 import CreatePlanItem from './common-elements/CreatePlanItem'
 import CreateItemModal from './common-elements/CreateItemModal'
-import EditItemModal from './common-elements/EditItemModal'
+// import EditItemModal from './common-elements/EditItemModal'
 import EditArrivalTimeModal from './common-elements/EditArrivalTimeModal'
 import EditPlanNameModal from './common-elements/EditPlanNameModal'
 
@@ -26,21 +26,6 @@ class CreateSchedule extends Component{
     }
   }
 
-  //draggable interaction for reordering the items
-  allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-  }
-
-  drop(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
-  }
-
   //set state after async API call
   async componentDidMount() {
     //figure which template to load
@@ -50,6 +35,7 @@ class CreateSchedule extends Component{
     this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
   }
 
+  //logic to determine which template to grab based on user inputs
   findTemplate = () => {
     let target = null
     if(this.state.children){
@@ -84,6 +70,37 @@ class CreateSchedule extends Component{
     return target
   }
 
+  //get template data
+  getTemplateData =  async (target) => {
+    const templateData = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}`)
+    const template = await templateData.json()
+    return template
+  }
+
+  //get template items DATA
+  getTemplateItems = async (target) => {
+    const templateDataItems = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
+    const templateItems = await templateDataItems.json()
+    return templateItems
+  }
+
+  //draggable interaction for reordering the items
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+  }
+
+
+  //update plan information section
   updateName = (name) => {
     this.setState({scheduleType: name, planName: name})
   }
@@ -110,23 +127,9 @@ class CreateSchedule extends Component{
     // max++
     // const { name, skippable, duration} = item
     // this.setState({})
-    await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
-    const templateItems = await templateDataItems.json()
-    return templateItems
-  }
-
-  //get template data
-  getTemplateData =  async (target) => {
-    const templateData = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}`)
-    const template = await templateData.json()
-    return template
-  }
-
-  //get template items DATA
-  getTemplateItems = async (target) => {
-    const templateDataItems = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
-    const templateItems = await templateDataItems.json()
-    return templateItems
+    // await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
+    // const templateItems = await templateDataItems.json()
+    // return templateItems
   }
 
 
@@ -186,7 +189,7 @@ class CreateSchedule extends Component{
           {itemData.sort((a,b) => {
             return a.order-b.order
           }).map((item,i) => {
-            return <CreatePlanItem item={item} key={i} id={item.id} modal={this.showModal} />
+            return <CreatePlanItem item={item} key={i} id={item.id} modalId={i} />
           })}
         </div>
         <div className="add-btn-contain" onClick={e => this.showModal('create-item')}>
@@ -198,7 +201,6 @@ class CreateSchedule extends Component{
             <h4 className="font-weight-bold mt-1">SAVE ></h4>
           </Link>
         </div>
-        {/* <EditItemModal /> */}
         <CreateItemModal addItem={this.addItem} />
         <EditPlanNameModal updateName={this.updateName} />
         <EditArrivalTimeModal updateTime={this.updateTime}  s/>
