@@ -6,21 +6,25 @@ const arriveBy = '5:05 PM'
 
 const MainStatusBar = () => {
   return (
-    <footer className="container text-white" style={{ height: '50px', position: 'fixed', bottom: '0' }}>
-      <div className="row">
-        <div className="col-5 progress m-0 p-0 rounded-0" style={{ height: '50px', backgroundColor: '#F0A202', position: 'relative' }} >
-          <h3 className="m-2" style={{ position: 'absolute' }}>{timeLeft} min</h3>
-          <div className="progress-bar bg-success h-100" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={ progress } aria-valuemin="0" aria-valuemax="100"></div>
+    <div className="flex-container text-white" style={{ height: '60px', position: 'fixed', bottom: '0' ,  backgroundColor: '#EAEBED', width: '100vw' }}>
+      <div className="row m-0">
+        <div className="col-4 p-0 m-1">
+          <div className="progress p-0 rounded-0" style={{ height: '50px', backgroundColor: 'darkgrey', position: 'relative', border: '2px solid #1C77C3' }} >
+            <h3 className="container mt-2 ml-0" style={{ position: 'absolute', textAlign: 'left' }}>{timeLeft} min</h3>
+            <div className="progress-bar bg-success h-100" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={ progress } aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         </div>
-        <div className="col-3 m-0 p-1" style={{ height: '50px', backgroundColor: '#1C77C3' }}>
-          <h6 className="m-0 p-0">arrive by:</h6>
-          <h5 className="m-0 p-0">{arriveBy}</h5>
+        <div className="col p-0 my-1">
+          <div style={{ height: '50px', backgroundColor: '#1C77C3', border: '2px solid #1C77C3', padding: '2px 0' }}>
+            <h6 className="m-0 p-0">arrive by:</h6>
+            <h5 className="m-0 p-0">{arriveBy}</h5>
+          </div>
         </div>
-        <div className="col-4 m-0 p-0" style={{ height: '50px' }}>
-          <button type="button" class="btn btn-block btn-amber p-0 h-100">I Made It!</button>
-        </div>
+        <button type="button" className="col-4 btn btn-block btn-amber text-lowercase m-1" style={{ height: '50px', border: '2px solid #1C77C3', padding: '15px 0' }}>
+          <h6 className="p-0">I Made It!</h6>
+        </button>
       </div>
-    </footer>
+    </div>
   )
 }
 
