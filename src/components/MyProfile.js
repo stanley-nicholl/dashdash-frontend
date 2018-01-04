@@ -1,4 +1,5 @@
 import React from 'react'
+import Badge from './common-elements/Badge'
 
 const MyProfile = () => {
 
@@ -13,7 +14,7 @@ const MyProfile = () => {
           <img className="profile-img mb-2" src="./img/branding/running-man-orange.svg" />
         </div>
         <div className="col-5">
-          <h5 className="text-left">Aldo<br/>Torres</h5>
+          <h5 className="text-left">{this.state.firstname}<br/>{this.state.lastname}</h5>
         </div>
         <div className="col-1"></div>
       </div>
@@ -23,7 +24,7 @@ const MyProfile = () => {
           <div className="switch">
             <label>
               no
-              <input type="checkbox"/>
+              <input type="checkbox" checked={this.state.children ? 'checked' : ''}/>
               <span className="lever"></span>
               yes
             </label>
@@ -34,7 +35,7 @@ const MyProfile = () => {
           <div className="switch">
             <label>
               no
-              <input type="checkbox"/>
+              <input type="checkbox" checked={this.state.pets ? 'checked' : ''}/>
               <span className="lever"></span>
               yes
             </label>
@@ -44,18 +45,9 @@ const MyProfile = () => {
       <h5 className="mb-4">Achievements</h5>
       <div className="container">
         <div className="row">
-          <div className="col-6">
-            <img className="badge-img" src="./img/badges/newbie.svg" />
-            <p className="badge-name">newbie</p>
-          </div>
-          <div className="col-6">
-            <img className="badge-img" src="./img/badges/beastmaster.svg" />
-            <p className="badge-name">beastmaster</p>
-          </div>
-          <div className="col-6">
-            <img className="badge-img" src="./img/badges/legend.svg" />
-            <p className="badge-name">legend</p>
-          </div>
+          {/* {badges.map(badge => {
+            return <CreatePlanItem badge={badge} key={badge.id} />
+          })} */}
         </div>
       </div>
     </div>

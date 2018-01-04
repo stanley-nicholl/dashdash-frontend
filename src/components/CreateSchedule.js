@@ -93,11 +93,23 @@ class CreateSchedule extends Component{
   }
 
 
-  render(){
-    const array = [
-      {id:1, name: '', duration: 0, skippable: false},
+  //setting up styling for the days of the week on the create schedule screen (autopopulating )
+  formatDayOfWeek(day){
+    const weekdays = ['M', 'T', 'W', 'Th', 'F']
+    const weekends = ['Su', 'S']
+     if(this.state.scheduleType === 'weekday' && weekdays.includes(day)){
+       console.log('weekday');
+       return 'active-day'
+     }else if(this.state.scheduleType === 'weekend' && weekends.includes(day)){
+       return 'active-day'
+     }else{
+       return 'day'
+     }
+  }
 
-    ]
+
+  render(){
+    const array = [{id:1, name: '', duration: 0, skippable: false}]
 
     //either populating above dummy data or if api call is complete, the template items
     let itemData = null;
@@ -107,6 +119,8 @@ class CreateSchedule extends Component{
       itemData = array
     }
 
+    const daysOfWeek = ['Su','M', 'T', 'W', 'Th', 'F', 'S']
+
     return (
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
@@ -115,13 +129,9 @@ class CreateSchedule extends Component{
         </div>
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
-            <DayOfWeekBtn day="Su"/>
-            <DayOfWeekBtn day="M"/>
-            <DayOfWeekBtn day="T"/>
-            <DayOfWeekBtn day="W"/>
-            <DayOfWeekBtn day="Th"/>
-            <DayOfWeekBtn day="F"/>
-            <DayOfWeekBtn day="S"/>
+            {daysOfWeek.map(day => {
+              return <DayOfWeekBtn day={day} color={this.formatDayOfWeek(day)} />
+            })}
           </div>
         </div>
         <div className="d-flex justify-content-center">

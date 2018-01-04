@@ -117,6 +117,7 @@
 
 .item-section{
   padding-bottom: 5rem;
+  /* margin-top: 9rem; */
 }
 
 /* .buffer{
@@ -124,6 +125,13 @@
   background-color:
 } */
 
+.top-dash{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: #EAEBED;
+  z-index: 10;
+}
 
 /*COMMON STYLING COMMON STYLING*/
 
@@ -207,7 +215,7 @@
   border-radius: 15px;
   height: 30px;
   width: 30px;
-  border: #13293D;
+  border: 1px solid #13293D;
 }
 
 .active-day{
@@ -219,7 +227,7 @@
   border-radius: 15px;
   height: 30px;
   width: 30px;
-  border: #13293D;
+  border: solid 1px #13293D;
 }
 
 .next-btn{
