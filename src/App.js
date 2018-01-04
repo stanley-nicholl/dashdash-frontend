@@ -117,7 +117,8 @@ class App extends Component {
           <Route exact path='/arrivalTime' component={ArrivalTime}/>
           <Route exact path='/configuring' component={Configuring}/>
 
-          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={createScheduleObj} />} />
+          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={ {children: this.state.children,
+          pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
           <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route exact path='/myProfile' component={MyProfile}/>
