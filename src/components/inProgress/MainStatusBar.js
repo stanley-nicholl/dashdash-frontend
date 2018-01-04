@@ -9,7 +9,7 @@ const MainStatusBar = () => {
     <div className="flex-container text-white" style={{ height: '60px', position: 'fixed', bottom: '0' ,  backgroundColor: '#EAEBED', width: '100vw' }}>
       <div className="row m-0">
         <div className="col-4 p-0 m-1">
-          <div className="progress p-0 rounded-0" style={{ height: '50px', backgroundColor: '#F0A202', position: 'relative', border: '2px solid #1C77C3' }} >
+          <div className="progress p-0 rounded-0" style={{ height: '50px', backgroundColor: 'darkgrey', position: 'relative', border: '2px solid #1C77C3' }} >
             <h3 className="container mt-2 ml-0" style={{ position: 'absolute', textAlign: 'left' }}>{timeLeft} min</h3>
             <div className="progress-bar bg-success h-100" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={ progress } aria-valuemin="0" aria-valuemax="100"></div>
           </div>
