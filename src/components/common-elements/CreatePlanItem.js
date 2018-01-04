@@ -8,7 +8,6 @@ class CreatePlanItem extends Component {
     this.state={
       modalOpen: false
     }
-    console.log(props);
   }
 
   closeModal = () => {
@@ -22,7 +21,6 @@ class CreatePlanItem extends Component {
 
   render(){
     const {item} = this.props
-    console.log(this.state);
     return(
       <div className="plan-items d-flex flex-column align-items-center template-item" draggable="true" onClick={ e => this.setState({modalOpen: true})}>
         <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">

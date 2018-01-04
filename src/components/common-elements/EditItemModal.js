@@ -39,7 +39,6 @@ class EditItemModel extends Component {
 
   render(){
     const {item} = this.props
-    console.log(item);
     return(
       <div className="modal fade" id={`edit-item-modal-${item.id}`} tabIndex="-1" role="dialog" aria-labelledby="user-modal" aria-hidden="true">
           <div className="modal-dialog cascading-modal" role="document">

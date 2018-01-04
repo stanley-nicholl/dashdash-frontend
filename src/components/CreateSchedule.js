@@ -22,7 +22,6 @@ class CreateSchedule extends Component{
       newArrivalTime: this.props.test.newArrivalTime,
       pets: this.props.test.pets,
       children: this.props.test.children,
-      planName: null,
       activeDays: []
     }
   }
@@ -34,7 +33,7 @@ class CreateSchedule extends Component{
     const template = await this.getTemplateData(target)
     let templateItems = await this.getTemplateItems(target)
     const activeDays = this.setDays()
-    this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
+    this.setState({templateName: template.Template.name.split(' ')[0], templateId: template.Template.id, templateItems: templateItems.TemplateItems, activeDays: activeDays})
   }
 
   //set initial active days for plan
@@ -131,7 +130,7 @@ class CreateSchedule extends Component{
 
   //update plan information section
   updateName = (name) => {
-    this.setState({scheduleType: name, planName: name})
+    this.setState({templateName: name})
   }
 
   updateTime = (time) => {
@@ -198,7 +197,7 @@ class CreateSchedule extends Component{
     return (
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
-          <h3 className="py-4 title font-weight-bold">{this.state.scheduleType}</h3>
+          <h3 className="py-4 title font-weight-bold">{this.state.templateName}</h3>
           <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg"  onClick={e => this.showModal('name')}/>
         </div>
         <div className="container">
