@@ -112,12 +112,15 @@ class App extends Component {
 
           <Route exact path='/signIn' component={ ({ history }) => <SignIn history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
           <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
-          <Route exact path='/gettingStarted' component={ () => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} />}/>
+          <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
-          <Route exact path='/arrivalTime' component={ArrivalTime}/>
-          <Route exact path='/configuring' component={Configuring}/>
 
-          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={createScheduleObj} />} />
+          <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time ={this.state.newArrivalTime} history={ history }/>}/>
+
+
+          <Route exact path='/configuring' component={Configuring}/>
+          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={ {children: this.state.children,
+          pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
           <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
           <Route exact path='/myProfile' component={MyProfile}/>
