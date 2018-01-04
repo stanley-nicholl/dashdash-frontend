@@ -20,7 +20,7 @@ const CreatePlanItem = ({item}) => {
         <p className="col-6 my-0 pl-0 text-left item-name">{item.name}</p>
         {skippable(item.skippable)}
         <div className="md-form col-2 my-0 px-2">
-          <input defaultValue={item.duration} type="text" id="form1" class="form-control"/>
+          <input defaultValue={item.duration} type="text" id="form1" className="form-control"/>
           <label htmlFor="form1"></label>
         </div>
       </div>

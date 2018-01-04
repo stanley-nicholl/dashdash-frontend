@@ -7,6 +7,7 @@ class DayOfWeekBtn extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
 
+
   // FUNCTION CURRENTLY SET UP WITH CLASS TO ENABLE STATE ONCE WE CONNECT TO THE BACKEND WHEN PEOPLE HAVE ALREADY DESIGNATED THEIR DAYS OF THE WEEK THEY WOULD LIKE A SCHEDULE APPLIED TO
 
   onClick (e) {
@@ -14,21 +15,12 @@ class DayOfWeekBtn extends React.Component {
     else{
       e.target.className = "day"
     }
-    // this.setState({
-    //   isButtonActive: !this.state.isButtonActive
-    // })
-
-    // this.props.openPanel(this.props.buttonNumber)
   }
 
-  test () {
-    alert('hello')
-  }
 
   render () {
-
     return (
-      <div onClick={e => this.onClick(e)} className="day">{this.props.day}</div>
+      <div onClick={e => this.onClick(e)} className={this.props.color}>{this.props.day}</div>
     )
   }
 }
