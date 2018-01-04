@@ -30,7 +30,8 @@ class App extends Component {
       newScheduleType: null,
       editDaysOfTheWeek: null,
       newArrivalTime: '9:00 AM',
-      editArrivalTime: null
+      editArrivalTime: null,
+      badges:[]
     }
   }
 
@@ -89,6 +90,25 @@ class App extends Component {
     return { userId, firstname, lastname, email, children, pets, plans }
   }
 
+
+  // get user Badges
+
+  fetchUserBadges = async (userId)=>{
+
+    const token = localStorage.getItem('dashdashUserToken')
+
+    let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${userId}`, {
+      method: 'GET',
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    })
+    let allBadges = await badgesResponce.json()
+
+    this.setState({badges:allBadges})
+
+  }
+
   // SET APP STATE FROM SUB-COMPONENTS
   saveAppState = (data) => {
     this.setState(data)
@@ -114,20 +134,21 @@ class App extends Component {
           <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
           <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
-
           <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time ={this.state.newArrivalTime} history={ history }/>}/>
 
+          <Route exact path='/navigation' component= {()=> <Navigation />}/>
 
           <Route exact path='/configuring' component={Configuring}/>
           <Route exact path='/createSchedule' component={ () => <CreateSchedule test={ {children: this.state.children,
           pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
           <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
-          <Route exact path='/myProfile' component={MyProfile}/>
+          <Route exact path='/myProfile' component={()=><MyProfile firstname= {this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} badges={this.state.badges}/>}/>
           <Route exact path='/editSchedule' component={EditSchedule}/>
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
           <Route exact path='/navigation' component={Navigation}/>
-          <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
+
+          <Route exact path='/' component={({history})=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} history={history} />}/>
         </div>
       </Router>
     )

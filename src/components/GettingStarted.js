@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 class GettingStarted extends Component {
 
   componentDidUpdate(){
-    console.log("stuff");
     this.props.history.push('/scheduleType')
   }
 

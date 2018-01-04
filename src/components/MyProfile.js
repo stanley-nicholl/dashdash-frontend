@@ -1,7 +1,7 @@
 import React from 'react'
 import Badge from './common-elements/Badge'
 
-const MyProfile = () => {
+const MyProfile = ({firstname, lastname, kids, pets, badges}) => {
 
   return (
     <div className="body">
@@ -14,7 +14,7 @@ const MyProfile = () => {
           <img className="profile-img mb-2" src="./img/branding/running-man-orange.svg" />
         </div>
         <div className="col-5">
-          <h5 className="text-left">{this.state.firstname}<br/>{this.state.lastname}</h5>
+          <h5 className="text-left">{firstname}<br/>{lastname}</h5>
         </div>
         <div className="col-1"></div>
       </div>
@@ -24,7 +24,7 @@ const MyProfile = () => {
           <div className="switch">
             <label>
               no
-              <input type="checkbox" checked={this.state.children ? 'checked' : ''}/>
+              <input type="checkbox" defaultChecked={kids ? 'checked' : ''}/>
               <span className="lever"></span>
               yes
             </label>
@@ -35,7 +35,7 @@ const MyProfile = () => {
           <div className="switch">
             <label>
               no
-              <input type="checkbox" checked={this.state.pets ? 'checked' : ''}/>
+              <input type="checkbox" defaultChecked={pets ? 'checked' : ''}/>
               <span className="lever"></span>
               yes
             </label>
