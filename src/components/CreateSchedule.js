@@ -23,7 +23,7 @@ class CreateSchedule extends Component{
       pets: this.props.test.pets,
       children: this.props.test.children,
       planName: null,
-      activeDays: null
+      activeDays: []
     }
   }
 
@@ -49,6 +49,19 @@ class CreateSchedule extends Component{
       result = [...weekends]
     }
     return result
+  }
+
+  //update active days as the user selects and unselects days on their plan
+  updateActiveDay = (day, command) => {
+    let activeDays
+    if(command === 'add'){
+      activeDays = [...this.state.activeDays, day]
+    }else{
+      activeDays = this.state.activeDays.filter(item => {
+        if(item !== day) return item
+      })
+    }
+    this.setState({activeDays: activeDays})
   }
 
   //logic to determine which template to grab based on user inputs
@@ -191,7 +204,7 @@ class CreateSchedule extends Component{
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
             {daysOfWeek.map(day => {
-              return <DayOfWeekBtn day={day} color={this.formatDayOfWeek(day)} />
+              return <DayOfWeekBtn day={day} color={this.formatDayOfWeek(day)} updateActiveDay={this.updateActiveDay}/>
             })}
           </div>
         </div>
