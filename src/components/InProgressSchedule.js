@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import Header from './common-elements/Header'
+import Header from './inProgress/Header'
+import ActiveItemBox from './inProgress/ActiveItemBox'
+import ItemsContainer from './inProgress/ItemsContainer'
+import MainStatusBar from './inProgress/MainStatusBar'
 
 class InProgressSchedule extends Component {
   constructor(props) {
@@ -12,7 +15,12 @@ class InProgressSchedule extends Component {
 
   render() {
     return (
-      <Header />
+      <div style={{ backgroundColor: '#EAEBED' }}>
+        <Header />
+        <ActiveItemBox />
+        <ItemsContainer />
+        <MainStatusBar />
+      </div>
     )
   }
 }
