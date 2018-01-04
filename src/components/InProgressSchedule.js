@@ -16,8 +16,10 @@ class InProgressSchedule extends Component {
   render() {
     return (
       <div style={{ backgroundColor: '#EAEBED' }}>
-        <Header />
-        <ActiveItemBox />
+        <div style={{ position: 'fixed', top: '0', width: '100vw', zIndex: '1' }}>
+          <Header />
+          <ActiveItemBox />
+        </div>
         <ItemsContainer />
         <MainStatusBar />
       </div>

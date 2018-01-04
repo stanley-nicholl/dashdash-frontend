@@ -3,7 +3,7 @@ import Item from './Item'
 
 const ItemsContainer = () => {
   return (
-    <div className="flex-container pb-3" style={{ overflow: 'scroll', height: '452px' }}>
+    <div className="container" style={{ overflow: 'scroll', height: '100vh', paddingTop: '165px', paddingBottom: '70px' }}>
       <Item style='previous' title='yawn' time='10'/>
       <Item style='previous' title='get dressed' time='10'/>
       <Item style='current' title='shower' time='15'/>
