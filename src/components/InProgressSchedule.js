@@ -15,7 +15,12 @@ class InProgressSchedule extends Component {
 
   render() {
     return (
-      <Header />
+      <div style={{ backgroundColor: '#EAEBED' }}>
+        <Header />
+        <ActiveItemBox />
+        <ItemsContainer />
+        <MainStatusBar />
+      </div>
     )
   }
 }
