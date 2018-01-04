@@ -17,6 +17,7 @@ class ArrivalTime extends Component{
   }
 
   render() {
+    console.log(this.props.time)
     return (
       <div className="body">
         <h2 className="py-4 mb-5 title font-weight-bold">create a schedule</h2>
@@ -32,7 +33,7 @@ class ArrivalTime extends Component{
         </div>
 
         <div className="footer-container py-3">
-            <NextButton onclick={console.log(document.querySelector('#input_starttime'))} />
+            <NextButton />
         </div>
       </div>
     )
