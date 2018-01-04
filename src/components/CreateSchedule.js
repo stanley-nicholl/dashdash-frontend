@@ -22,7 +22,8 @@ class CreateSchedule extends Component{
       newArrivalTime: this.props.test.newArrivalTime,
       pets: this.props.test.pets,
       children: this.props.test.children,
-      planName: null
+      planName: null,
+      activeDays: null
     }
   }
 
@@ -32,7 +33,22 @@ class CreateSchedule extends Component{
     let target = this.findTemplate()
     const template = await this.getTemplateData(target)
     let templateItems = await this.getTemplateItems(target)
+    const activeDays = this.setDays()
     this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
+  }
+
+  //set initial active days for plan
+  setDays = () => {
+    const daysOfWeek = ['Su','M', 'T', 'W', 'Th', 'F', 'S']
+    const weekdays = ['M', 'T', 'W', 'Th', 'F']
+    const weekends = ['Su', 'S']
+    let result = null
+    if(this.state.scheduleType === 'weekday'){
+      result = [...weekdays]
+    }else{
+      result = [...weekends]
+    }
+    return result
   }
 
   //logic to determine which template to grab based on user inputs
@@ -134,16 +150,16 @@ class CreateSchedule extends Component{
 
 
   //setting up styling for the days of the week on the create schedule screen (autopopulating )
+
   formatDayOfWeek(day){
-    const weekdays = ['M', 'T', 'W', 'Th', 'F']
-    const weekends = ['Su', 'S']
-     if(this.state.scheduleType === 'weekday' && weekdays.includes(day)){
-       return 'active-day'
-     }else if(this.state.scheduleType === 'weekend' && weekends.includes(day)){
-       return 'active-day'
-     }else{
-       return 'day'
-     }
+    if(this.state.activeDays){
+      if(this.state.activeDays.includes(day)){
+        return 'active-day'
+      }else{
+        return 'day'
+      }
+    }
+     return 'day'
   }
 
   showModal = (type) => {
