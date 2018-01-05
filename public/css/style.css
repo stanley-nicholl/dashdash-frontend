@@ -13,7 +13,7 @@
   color: #1C77C3;
   background-color: #EAEBED;
   min-height: 100vh;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .title{
@@ -102,6 +102,10 @@
 
 /*Schedule Dashboard Schedule Dashboard*/
 
+.schedule-content{
+  margin-bottom: 3.5rem;
+}
+
 .scheduleTile{
   background-color: #13293D;
   color: gray;
@@ -111,6 +115,27 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   color: #F0A202;
+}
+
+.schedule-card{
+  width: 20vh;
+  height: 15vh;
+  margin-right: .7rem;
+  margin-left: .7rem;
+  border-radius: 0;
+  background-color: #13293D;
+  background-image: url('../img/branding/schedule-background-orange.svg');
+  background-size: 20% 20%;
+  background-repeat: no-repeat;
+  background-position: 5% 90%;
+  overflow: hidden;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(122,121,122,0.66);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(122,121,122,0.66);
+  box-shadow: 3px 3px 5px 0px rgba(122,121,122,0.66);
+}
+
+.schedule-card-content{
+  color: #EAEBED
 }
 
 /*CREATE/EDIT DASHBOARD*/
@@ -171,7 +196,7 @@
   background-color: #F0A202;
   color: #13293D;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   width: 100vw;
 }
 
@@ -253,7 +278,19 @@
 
 /*HEADER HEADER HEADER*/
 
-.nav-hamburger
+.nav-hamburger{
+  height: 5vh;
+  width: auto;
+}
+
+.logo{
+  height: 8vh;
+  width: auto;
+}
+
+.head-title{
+  color: #13293D;
+}
 
 /* NAVIGATION NAVIGATION NAVIGATION */
 
@@ -277,8 +314,8 @@
   color: #EAEBED;
 }
 
-.logout-img{
-  height: 5vh;
+.close-img{
+  height: 4vh;
   width: auto;
 }
 
@@ -291,6 +328,19 @@
   position: fixed;
   bottom: 0;
   width: 85vw;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1C77C3;
+    overflow-x: hidden;
+    transition: 0.5s;
+
 }
 
 /* UPCOMINGWEEK UPCOMINGWEEK UPCOMINGWEEK */
@@ -325,9 +375,6 @@
 .upcoming-footnote{
   width: 100vw;
   text-align: center;
-  position: fixed;
-  bottom: 10px;
-  left: 0;
 }
 
 /*loading spinner*/
