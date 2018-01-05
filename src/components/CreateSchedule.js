@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 import AddNewButton from './common-elements/AddNewButton'
 import CreatePlanItem from './common-elements/CreatePlanItem'
@@ -186,7 +186,7 @@ class CreateSchedule extends Component{
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
           <h3 className="py-4 title font-weight-bold">{this.state.scheduleType}</h3>
-          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg"  onClick={e => this.showModal('name')}/>
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg" alt="edit" onClick={e => this.showModal('name')}/>
         </div>
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
@@ -197,7 +197,7 @@ class CreateSchedule extends Component{
         </div>
         <div className="d-flex justify-content-center">
           <h2>{this.state.newArrivalTime}</h2>
-          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-blue.svg" onClick={e => this.showModal('time')} />
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-blue.svg" alt="edit" onClick={e => this.showModal('time')} />
         </div>
 
         <div className="item-section">

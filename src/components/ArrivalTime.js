@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
 import NextButton from './common-elements/NextButton'
 
 class ArrivalTime extends Component{
@@ -22,7 +21,7 @@ class ArrivalTime extends Component{
     return (
       <div className="body">
         <h2 className="py-4 mb-5 title font-weight-bold">create a schedule</h2>
-        <img className="selection-img mb-2" src="./img/branding/days-of-the-week-orange.svg" />
+        <img className="selection-img mb-2" src="./img/branding/days-of-the-week-orange.svg" alt="days of the week" />
         <h5 className="px-5">when do you need to be at your destination?</h5>
         <small className="mb-5 pb-5">aka work, the gym, the opera, HH</small>
         <div className="container">

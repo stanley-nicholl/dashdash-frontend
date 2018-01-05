@@ -20,7 +20,7 @@ const EditPlanNameModal = ({updateName}) => {
             </div>
             <div id="user-modal-body" className="modal-body mb-0">
               <div>
-                <input className="mb-0" id="name"  type="text" className="form-control"/>
+                <input className="mb-0 form-control" id="name"  type="text" />
                 <small className="mt-0">schedule name</small>
               </div>
 
