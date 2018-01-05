@@ -319,7 +319,7 @@
 }
 
 .close-img{
-  height: 4vh;
+  height: 3vh;
   width: auto;
 }
 
@@ -344,7 +344,17 @@
     background-color: #1C77C3;
     overflow-x: hidden;
     transition: 0.5s;
+}
 
+.logout-img{
+  height: 3vh;
+  width: auto;
+}
+
+.logout{
+  /* position: fixed;
+  bottom: 0;
+  left: 0; */
 }
 
 /* UPCOMINGWEEK UPCOMINGWEEK UPCOMINGWEEK */
