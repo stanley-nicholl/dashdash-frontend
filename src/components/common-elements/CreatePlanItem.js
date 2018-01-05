@@ -15,8 +15,8 @@ class CreatePlanItem extends Component {
   }
 
   skippable = (skippable) => {
-    if(skippable) return <img className="skippable-img pl-2 pr-2 col-2" src="./img/branding/skip-white.svg" />
-    return <img className="col-2" />
+    if(skippable) return <img className="skippable-img pl-2 pr-2 col-2" src="./img/branding/skip-white.svg" alt="skip icon" />
+    return <img className="col-2" alt="blank" />
   }
 
   render(){
@@ -24,7 +24,7 @@ class CreatePlanItem extends Component {
     return(
       <div className="plan-items d-flex flex-column align-items-center template-item" draggable="true" onClick={ e => this.setState({modalOpen: true})}>
         <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
-          <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" />
+          <img className="order-img pl-2 pr-2 col-2" src="./img/branding/hamburger-nav-white.svg" alt="hamburger" />
           <p className="col-6 my-0 pl-0 text-left item-name">{item.name}</p>
           {this.skippable(item.skippable)}
           <div className="col-2 my-0 pb-2 px-2 text-center">

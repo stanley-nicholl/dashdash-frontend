@@ -3,7 +3,7 @@ import React from 'react'
 const Badge = (badge) => {
   return(
     <div className="col-6">
-      <img className="badge-img" src={badge.image} />
+      <img className="badge-img" src={badge.image} alt="badge" />
       <p className="badge-name">{badge.name}</p>
     </div>
   )

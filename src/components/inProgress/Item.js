@@ -8,18 +8,20 @@ function setItemStyle (style) {
       return { backgroundColor:'darkgrey', width:'80vw', margin: '5px 0' }
     case 'upcoming' :
       return { backgroundColor:'goldenrod', width:'80vw', margin: '5px 0' }
+    default :
+      break
   }
 }
 
-const Item = ({ style, title, time }) => {
+const Item = ({ itemStatus, title, timeMinutes }) => {
   return (
     <div className="d-flex flex-column align-items-center">
-        <div className="row d-flex flex-nowrap align-items-center text-white" style={ setItemStyle(style) }>
+        <div className="row d-flex flex-nowrap align-items-center text-white" style={ setItemStyle(itemStatus) }>
           <div className="col-9 my-0 text-left">
             <h4 className="m-2">{ title }</h4>
           </div>
           <div className="md-form col-3 my-0">
-            <h4 className="m-2">{ time }</h4>
+            <h4 className="m-2">{ timeMinutes }</h4>
           </div>
         </div>
       </div>
