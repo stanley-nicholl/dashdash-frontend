@@ -8,7 +8,6 @@ class CreatePlanItem extends Component {
     this.state={
       modalOpen: false
     }
-    console.log(props);
   }
 
   closeModal = () => {
@@ -21,8 +20,7 @@ class CreatePlanItem extends Component {
   }
 
   render(){
-    const {item} = this.props
-    console.log(this.state);
+    const {item, updateItem} = this.props
     return(
       <div className="plan-items d-flex flex-column align-items-center template-item" draggable="true" onClick={ e => this.setState({modalOpen: true})}>
         <div className="plan-item row d-flex flex-nowrap align-items-center mt-2">
@@ -34,7 +32,7 @@ class CreatePlanItem extends Component {
             <small className="mt-0">min</small>
           </div>
         </div>
-        {this.state.modalOpen ? <EditItemModal item={item} closeModal={this.closeModal}/> : null }
+        {this.state.modalOpen ? <EditItemModal updateItem={updateItem} item={item} closeModal={this.closeModal}/> : null }
       </div>
     )
   }

@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class GettingStarted extends Component {
 
   componentDidUpdate(){
-    console.log("stuff");
     this.props.history.push('/scheduleType')
   }
 
@@ -13,7 +12,6 @@ class GettingStarted extends Component {
     const kids = document.getElementById('kids').checked
     const pets = document.getElementById('pets').checked
     const token = localStorage.getItem('dashdashUserToken')
-    console.log(kids, pets);
     await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/users/${this.props.id}`, {
       method: 'PUT',
       body: JSON.stringify({children: (kids), pets: (pets)}),
@@ -35,8 +33,8 @@ class GettingStarted extends Component {
   render() {
     return (
       <div className="body">
-        <h2 className="py-4 mb-4 title font-weight-bold">one quick question</h2>
-        <img className="selection-img mb-2" src="./img/branding/kids-orange.svg" alt="kids" />
+        <h2 className="py-4 mb-4 title font-weight-bold">two quick questions</h2>
+        <img className="selection-img mb-2" src="./img/branding/kids-orange.svg" alt="kids"/>
         <h5 className="mb-4">do you have kids?</h5>
         <form>
           <div className="switch">

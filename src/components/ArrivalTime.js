@@ -9,11 +9,12 @@ class ArrivalTime extends Component{
     });
   }
   componentDidUpdate=()=>{
-    this.props.history.push('/')
+    this.props.history.push('/configuring')
   }
 
   grabData = () => {
     const time = window.$('#input_starttime').val()
+    this.props.updateNewScheduleArrivalTimeData(time);
     this.componentDidUpdate()
   }
 
