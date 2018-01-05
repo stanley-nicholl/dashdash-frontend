@@ -14,7 +14,6 @@ import MyProfile from './components/MyProfile'
 import ScheduleDashboard from './components/ScheduleDashboard'
 import InProgressSchedule from './components/InProgressSchedule'
 import Navigation from './components/common-elements/Navigation'
-import Headertype from './components/common-elements/Header'
 
 class App extends Component {
   constructor(){
@@ -133,7 +132,6 @@ class App extends Component {
           <Route exact path='/editSchedule' component={EditSchedule}/>
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
           <Route exact path='/navigation' component={Navigation}/>
-          <Route exact path='/header' component={Headertype}/>
           <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>

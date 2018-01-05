@@ -1,23 +1,17 @@
 import React from 'react';
 
 
-const Headertype = ({history}) => {
-
-  const openNav = ()=>{
-    history.push('/navigation')
-  }
+const Headertype = ({history, openNav}) => {
 
   return (
-      <header className="d-flex dash-header align-items-center justify-content-start px-3">
-        <div onClick={openNav} >
-          <img src="./img/svg/hamburger-nav-white.svg" style={{height:50}}/>
+      <header className="d-flex dash-header align-items-center justify-content-between px-3 py-4">
+        <div>
+          <img src="./img/branding/hamburger-nav-darkblue.svg" className="nav-hamburger" onClick={e => openNav()}/>
         </div>
-        <div className="d-flex ml-5 dash-header-content justify-content-center">
-          <h1>
-            <b>Dash-Dash</b>
-          </h1>
-          <img src="../../img/branding/running-man-white.svg" style={{height:90}}/>
+        <div className="d-flex dash-header-content justify-content-center">
+          <h3 className="mt-2 head-title"><em>DASH</em> dash</h3>
         </div>
+        <img src="../../img/branding/running-man-darkblue.svg" className="logo"/>
       </header>
 
   );

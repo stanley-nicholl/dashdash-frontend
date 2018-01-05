@@ -1,12 +1,12 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
-const Navigation = () => {
+const Navigation = ({closeNav}) => {
 
   return (
-    <div className="navigation">
+    <div className="navigation sidenav" id="side-nav">
       <div className="nav-top d-flex justify-content-end">
-        <div className="d-flex justify-content-end mb-5"><img className="logout-img mt-4 mr-3" src="./img/branding/logout-navy.svg" /></div>
+        <div className="d-flex justify-content-end"><img src="./img/branding/x-darkblue.svg" className="close-img mr-2 mt-3" onClick={e => closeNav()}/></div>
       </div>
       <div className="nav-body mt-4">
         <div className="d-flex mb-4 ml-4 align-items-center">
@@ -15,15 +15,12 @@ const Navigation = () => {
         </div>
         <div className="d-flex mb-4 ml-4 align-items-center">
           <img className="nav-img mb-2 mr-4" src="./img/branding/my-schedule-white.svg" />
-          <Link to={'/scheduleDashboard'}><h5 className="text-white">My Schedules</h5></Link>
+          <Link to={'/'}><h5 className="text-white">My Schedules</h5></Link>
         </div>
         <div className="d-flex mb-4 ml-4 align-items-center">
           <img className="nav-img mb-2 mr-4" src="./img/branding/upcoming-week-white.svg" />
           <Link to={'/upcomingWeek'}><h5 className="text-white">My Upcoming Week</h5></Link>
         </div>
-      </div>
-      <div className="nav-footer">
-        <h3 className="nav-title text-center">DASH DASH</h3>
       </div>
     </div>
   )
