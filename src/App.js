@@ -30,8 +30,7 @@ class App extends Component {
       newScheduleType: null,
       editDaysOfTheWeek: null,
       newArrivalTime: '9:00 AM',
-      editArrivalTime: null,
-      badges:[]
+      editArrivalTime: null
     }
   }
 
@@ -91,24 +90,6 @@ class App extends Component {
   }
 
 
-  // get user Badges
-
-  fetchUserBadges = async (userId)=>{
-
-    const token = localStorage.getItem('dashdashUserToken')
-
-    let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'authorization': `Bearer ${token}`
-      }
-    })
-    let allBadges = await badgesResponce.json()
-
-    this.setState({badges:allBadges})
-
-  }
-
   // SET APP STATE FROM SUB-COMPONENTS
   saveAppState = (data) => {
     this.setState(data)
@@ -143,7 +124,10 @@ class App extends Component {
           pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
           <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
-          <Route exact path='/myProfile' component={()=><MyProfile firstname= {this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} badges={this.state.badges}/>}/>
+
+          <Route exact path='/myProfile' component={()=><MyProfile state={this.state}/>}/>
+
+
           <Route exact path='/editSchedule' component={EditSchedule}/>
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
           <Route exact path='/navigation' component={Navigation}/>
