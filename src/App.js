@@ -57,9 +57,9 @@ class App extends Component {
     this.setState({newScheduleType: type})
   }
 
-  // updateNewScheduleKidsPetsData = (kids, pets) => {
-  //   this.setState({children: kids, pets: pets})
-  // }
+  updateNewScheduleArrivalTimeData = (time) => {
+    this.setState({newArrivalTime: time})
+  }
 
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
@@ -131,31 +131,32 @@ class App extends Component {
         <div className="App">
           { !this.state.userToken ? <Redirect push to='/signIn' /> : null }
 
-          <Route exact path='/signIn' component={ ({ history }) => <SignIn history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+          <Route exact path='/signIn' component={ (props) => <SignIn { ...props } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
 
-          <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+          <Route exact path='/signUp' component={ (props) => <SignUp { ...props } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
 
-          <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
+          <Route exact path='/gettingStarted' component={ (props) => <GettingStarted { ...props } updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} id={this.state.userId} />}/>
 
-          <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
-          <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time ={this.state.newArrivalTime} history={ history }/>}/>
+          <Route exact path='/scheduleType' component={ (props) => <ScheduleType { ...props } updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
 
-          <Route exact path='/navigation' component= {()=> <Navigation />}/>
+          <Route exact path='/arrivalTime' component={(props)=> <ArrivalTime { ...props } time={this.state.newArrivalTime} updateNewScheduleArrivalTimeData={this.updateNewScheduleArrivalTimeData} />}/>
+
+          <Route exact path='/navigation' component= {(props)=> <Navigation {...props} />}/>
 
           <Route exact path='/configuring' component={Configuring}/>
 
-          <Route exact path='/createSchedule' component={ ({ history }) => <CreateSchedule test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId }} history={history} />} />
-          <Route exact path='/myProfile' component={()=><MyProfile firstname= {this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} userId={this.state.userId}/>}/>
-          <Route path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
+          <Route exact path='/createSchedule' component={ (props) => <CreateSchedule { ...props } test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId }} />} />
 
-          <Route exact path='/myProfile' component={()=><MyProfile state={this.state}/>}/>
+          <Route exact path='/myProfile' component={(props) => <MyProfile { ...props } firstname={this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} userId={this.state.userId}/>}/>
+
+          <Route path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
 
           <Route exact path='/editSchedule' component={EditSchedule}/>
 
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
 
           <Route exact path='/navigation' component={Navigation}/>
-          <Route exact path='/' component={ () => <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
+          <Route exact path='/' component={ (props) => <ScheduleDashboard { ...props } plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
     )
