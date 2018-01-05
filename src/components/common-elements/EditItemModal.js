@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 
 class EditItemModel extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      activeChecked: this.props.item.skippable
+    }
+  }
+
+  componentWillReceiveProps = (props) => {
+    if(this.props.item.skippable === props.item.skippable) return
+    console.log(props);
+    this.setState({activeChecked: props.item.skippable})
+  }
 
   componentDidMount = () => {
     const {item} = this.props
@@ -18,28 +30,39 @@ class EditItemModel extends Component {
     })
   }
 
+  //deletes targeted item from schedule
   deleteModal = (e) => {
-    const {item} = this.props
+    const {item, updateItem} = this.props
     window.$(`#edit-item-modal-${item.id}`).modal('toggle')
+    updateItem(item, 'delete')
     this.props.closeModal()
   }
 
+  //cancels edit function and returns to schedule screen
   cancelModal = (e) => {
     const {item} = this.props
     window.$(`#edit-item-modal-${item.id}`).modal('toggle')
     this.props.closeModal()
   }
 
+  //updates an individual item with users inputs
   updateModal = (e) => {
-    const {item} = this.props
+    const {item, updateItem} = this.props
+    const itemPrep = {
+      id: item.id,
+      name: document.getElementById('task-name').value,
+      skippable: document.getElementById('active').checked,
+      duration: parseInt(document.getElementById('task-duration').value),
+      order: item.order,
+    }
     window.$(`#edit-item-modal-${item.id}`).modal('toggle')
+    updateItem(itemPrep, 'edit')
     this.props.closeModal()
   }
 
 
   render(){
     const {item} = this.props
-    console.log(item);
     return(
       <div className="modal fade" id={`edit-item-modal-${item.id}`} tabIndex="-1" role="dialog" aria-labelledby="user-modal" aria-hidden="true">
           <div className="modal-dialog cascading-modal" role="document">
@@ -53,17 +76,17 @@ class EditItemModel extends Component {
                   </div>
                   <div id="user-modal-body" className="modal-body mb-0">
                     <div>
-                      <input className="mb-0" defaultValue={item.name} type="text" className="form-control"/>
+                      <input className="mb-0" defaultValue={item.name} type="text" id="task-name" className="form-control"/>
                       <small className="mt-0">task name</small>
                     </div>
 
                     <div className="form-group d-flex justify-content-start mt-5">
-                      <input type="checkbox" id="active" checked={!item.skippable ? 'checked' : null}/>
+                      <input type="checkbox" id="active" checked={this.state.activeChecked} onChange={e => this.setState({activeChecked: !this.state.activeChecked})}/>
                       <label htmlFor="active">required task <small>(i.e. could you skip it?)</small></label>
                     </div>
 
                     <div className="mb-3">
-                      <input className="mb-0" defaultValue={item.duration} type="number" className="form-control"/>
+                      <input className="mb-0" defaultValue={item.duration} id="task-duration" type="number" className="form-control"/>
                       <small className="mt-0">duration <small>(in minutes)</small></small>
                     </div>
 

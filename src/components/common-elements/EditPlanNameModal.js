@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditPlanNameModal = ({updateName}) => {
+const EditPlanNameModal = ({updateName, name}) => {
 
   const updateModal = (e) => {
     window.$('#name-modal').modal('toggle')
@@ -20,8 +20,8 @@ const EditPlanNameModal = ({updateName}) => {
             </div>
             <div id="user-modal-body" className="modal-body mb-0">
               <div>
-                <input className="mb-0" id="name"  type="text" className="form-control"/>
-                <small className="mt-0">schedule name</small>
+                <input className="mb-0" id="name" type="text" className="form-control"/>
+                <small className="mt-0">create a new name for your schedule</small>
               </div>
 
               <div className="d-flex justify-content-center">

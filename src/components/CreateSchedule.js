@@ -22,8 +22,10 @@ class CreateSchedule extends Component{
       newArrivalTime: this.props.test.newArrivalTime,
       pets: this.props.test.pets,
       children: this.props.test.children,
-      planName: null,
-      activeDays: null
+      activeDays: [],
+      tempIdCounter: 50,
+      createModalOpen: false,
+      userId: this.props.test.userId
     }
   }
 
@@ -34,7 +36,7 @@ class CreateSchedule extends Component{
     const template = await this.getTemplateData(target)
     let templateItems = await this.getTemplateItems(target)
     const activeDays = this.setDays()
-    this.setState({templateName: template.Template.name, templateId: template.Template.id, templateItems: templateItems.TemplateItems})
+    this.setState({templateName: template.Template.name.split(' ')[0], templateId: template.Template.id, templateItems: templateItems.TemplateItems, activeDays: activeDays})
   }
 
   //set initial active days for plan
@@ -49,6 +51,19 @@ class CreateSchedule extends Component{
       result = [...weekends]
     }
     return result
+  }
+
+  //update active days as the user selects and unselects days on their plan
+  updateActiveDay = (day, command) => {
+    let activeDays
+    if(command === 'add'){
+      activeDays = [...this.state.activeDays, day]
+    }else{
+      activeDays = this.state.activeDays.filter(item => {
+        if(item !== day) return item
+      })
+    }
+    this.setState({activeDays: activeDays})
   }
 
   //logic to determine which template to grab based on user inputs
@@ -100,6 +115,60 @@ class CreateSchedule extends Component{
     return templateItems
   }
 
+  //save and create plan for user --> take them to their schedule dashboard
+
+  writeToDb = async () => {
+    const plan = {
+      name: this.state.templateName,
+      active: true,
+      deadline: this.state.newArrivalTime,
+      days_to_run: this.state.activeDays.join()
+    }
+
+    let planItems = this.state.templateItems.sort( (a,b) => {
+      return a.order - b.order
+    })
+
+    let targetItems = planItems.map( item => {
+      return {name: item.name, duration: item.duration, skippable: item.skippable}
+    })
+
+    const token = localStorage.getItem('dashdashUserToken')
+
+
+    const newPlan = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/users/${this.state.userId}`, {
+      method: 'POST',
+      body: JSON.stringify(plan),
+      headers: {
+        'authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+
+    const targetPlan = await newPlan.json()
+
+
+    const promises = targetItems.map( item => {
+      return fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/${targetPlan.Plan.id}/items`, {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+          'authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      })
+    })
+
+    Promise.all(promises)
+      .then( result =>{
+        console.log(result);
+        this.props.history.push('/')
+      })
+      .catch(console.error)
+
+  }
+
   //draggable interaction for reordering the items
   allowDrop(ev) {
     ev.preventDefault();
@@ -118,7 +187,7 @@ class CreateSchedule extends Component{
 
   //update plan information section
   updateName = (name) => {
-    this.setState({scheduleType: name, planName: name})
+    this.setState({templateName: name})
   }
 
   updateTime = (time) => {
@@ -132,20 +201,47 @@ class CreateSchedule extends Component{
     this.setState({newArrivalTime: newTime})
   }
 
-  addItem = async (item) => {
-    // const sequence = []
-    // this.state.templateItems.forEach( item => {
-    //   sequence.push(parseInt(item.order))
-    // })
-    // let max = sequence.reduce( (a,b) => {
-    //   return Math.max(a,b)
-    // })
-    // max++
-    // const { name, skippable, duration} = item
-    // this.setState({})
-    // await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/templates/${target}/items`)
-    // const templateItems = await templateDataItems.json()
-    // return templateItems
+  addItem = (item) => {
+    const sequence = []
+    this.state.templateItems.forEach( item => {
+      sequence.push(parseInt(item.order))
+    })
+    let max = sequence.reduce( (a,b) => {
+      return Math.max(a,b)
+    })
+    max++
+    const { name, skippable, duration } = item
+    const newItem = {
+      id: this.state.tempIdCounter,
+      name: name,
+      duration: duration,
+      skippable: skippable,
+      order: max
+    }
+    const newCounterNum = this.state.tempIdCounter++
+    const updatedItems = [...this.state.templateItems, newItem]
+    this.setState({ templateItems: updatedItems,  tempIdCounter: newCounterNum})
+  }
+
+  updateItem = (target, command) => {
+    let updatedItems
+    if(command === 'delete'){
+      updatedItems = this.state.templateItems.filter(item => {
+        if(item.order !== target.order){
+          return item
+        }
+      })
+    }else if(command === 'edit'){
+      const { id, name, skippable, duration, order } = target
+      updatedItems = this.state.templateItems.map(item => {
+        if(item.id === target.id){
+          return target
+        }else{
+          return item
+        }
+      })
+    }
+    this.setState({ templateItems: updatedItems})
   }
 
 
@@ -185,13 +281,13 @@ class CreateSchedule extends Component{
     return (
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
-          <h3 className="py-4 title font-weight-bold">{this.state.scheduleType}</h3>
+          <h3 className="py-4 title font-weight-bold">{this.state.templateName}</h3>
           <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg"  onClick={e => this.showModal('name')}/>
         </div>
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
-            {daysOfWeek.map(day => {
-              return <DayOfWeekBtn day={day} color={this.formatDayOfWeek(day)} />
+            {daysOfWeek.map((day, i) => {
+              return <DayOfWeekBtn day={day} key={i} color={this.formatDayOfWeek(day)} updateActiveDay={this.updateActiveDay}/>
             })}
           </div>
         </div>
@@ -205,19 +301,21 @@ class CreateSchedule extends Component{
           {itemData.sort((a,b) => {
             return a.order-b.order
           }).map((item,i) => {
-            return <CreatePlanItem item={item} key={i} id={item.id} modalId={i} />
+            return <CreatePlanItem item={item} updateItem={this.updateItem} key={i} id={item.id} modalId={i} />
           })}
         </div>
-        <div className="add-btn-contain" onClick={e => this.showModal('create-item')}>
+        <div className="add-btn-contain" onClick={e =>{
+          this.setState({createModalOpen: true})
+          this.showModal('create-item')
+        } }>
           <AddNewButton />
         </div>
 
-        <div className="footer-container py-3">
-          <Link to="/ScheduleDashboard">
-            <h4 className="font-weight-bold mt-1">SAVE ></h4>
-          </Link>
+        <div className="footer-container py-3" onClick={e => this.writeToDb()}>
+          <h4 className="font-weight-bold mt-1">SAVE ></h4>
         </div>
         <CreateItemModal addItem={this.addItem} />
+        {this.state.createModalOpen ? <CreateItemModal closeModal={this.closeModal}/> : null }
         <EditPlanNameModal updateName={this.updateName} />
         <EditArrivalTimeModal updateTime={this.updateTime}  s/>
       </div>
