@@ -20,6 +20,7 @@ class CreateSchedule extends Component{
       templateItems: [],
       scheduleType: this.props.test.newScheduleType,
       newArrivalTime: this.props.test.newArrivalTime,
+      newArrivalTimeDb: null,
       pets: this.props.test.pets,
       children: this.props.test.children,
       activeDays: [],
@@ -31,7 +32,18 @@ class CreateSchedule extends Component{
 
   //set state after async API call
   async componentDidMount() {
+    let time
+    if(this.state.newArrivalTimeDb === null){
+      if(this.state.newArrivalTime.substring(5) === 'PM'){
+        let tempTime = this.state.newArrivalTime.substring(5,0)
+        console.log(tempTime);
+      }
+
+    }else{
+      time = this.state.newArrivalTimeDb
+    }
     //figure which template to load
+    console.log(this.state.newArrivalTime);
     let target = this.findTemplate()
     const template = await this.getTemplateData(target)
     let templateItems = await this.getTemplateItems(target)
@@ -118,6 +130,13 @@ class CreateSchedule extends Component{
   //save and create plan for user --> take them to their schedule dashboard
 
   writeToDb = async () => {
+    let time
+    if(this.state.newArrivalTimeDb === null){
+      const tempTime = this.state.newArrivalTime.split()
+    }else{
+      time = this.state.newArrivalTimeDb
+    }
+
     const plan = {
       name: this.state.templateName,
       active: true,
@@ -198,7 +217,7 @@ class CreateSchedule extends Component{
     }else{
       newTime = `${temp[0]}:${temp[1]} AM`
     }
-    this.setState({newArrivalTime: newTime})
+    this.setState({newArrivalTime: newTime, newArrivalTimeDb: time})
   }
 
   addItem = (item) => {
