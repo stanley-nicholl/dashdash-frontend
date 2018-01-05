@@ -102,11 +102,9 @@ class InProgressSchedule extends Component {
       let itemsCopy = cloneDeep(prevState.items)
       let leftOverTime = itemsCopy[currentIndex].itemSecondsLeft
       let newItems = itemsCopy.map((el, index) => {
-        console.log(currentIndex, index, el.itemSecondsLeft)
         if (index === currentIndex) el.itemSecondsLeft = 0
         else if (index === currentIndex + 1) el.itemSecondsLeft = el.itemSecondsLeft + Math.floor(leftOverTime / itemsLeft) + leftOverTime % itemsLeft
         else if (index > currentIndex + 1) el.itemSecondsLeft = el.itemSecondsLeft + Math.floor(leftOverTime / itemsLeft)
-        console.log(currentIndex, index, el.itemSecondsLeft)
         return el
       })
       let newCurrentItemIndex = currentIndex + 1
