@@ -52,7 +52,7 @@ class EditItemModel extends Component {
       id: item.id,
       name: document.getElementById('task-name').value,
       skippable: document.getElementById('active').checked,
-      duration: parseInt(document.getElementById('task-duration').value),
+      duration: parseInt(document.getElementById('task-duration').value, 10),
       order: item.order,
     }
     window.$(`#edit-item-modal-${item.id}`).modal('toggle')

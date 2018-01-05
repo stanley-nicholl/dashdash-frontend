@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import './App.css';
+import './App.css'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import GettingStarted from './components/GettingStarted'
@@ -16,8 +16,8 @@ import InProgressSchedule from './components/InProgressSchedule'
 import Navigation from './components/common-elements/Navigation'
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       userToken: localStorage.getItem('dashdashUserToken'),
       userId: null,
@@ -125,10 +125,9 @@ class App extends Component {
 
           <Route exact path='/configuring' component={Configuring}/>
 
-          <Route exact path='/createSchedule' component={ ({ history }) => <CreateSchedule test={ {children: this.state.children,
-          pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId}} history={history} />} />
+          <Route exact path='/createSchedule' component={ ({ history }) => <CreateSchedule test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId }} history={history} />} />
 
-          <Route exact path='/inProgressSchedule' component={ () => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } planId={ 1 } /> }/>
+          <Route path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
 
           <Route exact path='/myProfile' component={()=><MyProfile state={this.state}/>}/>
 
@@ -137,7 +136,7 @@ class App extends Component {
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
 
           <Route exact path='/navigation' component={Navigation}/>
-          <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
+          <Route exact path='/' component={ () => <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
     )

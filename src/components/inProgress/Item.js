@@ -13,15 +13,22 @@ function setItemStyle (style) {
   }
 }
 
-const Item = ({ itemStatus, title, timeMinutes }) => {
+function formatTime(timeSeconds) {
+  if (typeof timeSeconds !== 'number') return '--'
+  const minutes = Math.floor(timeSeconds / 60)
+  const seconds = timeSeconds % 60
+  return `${ '' + minutes }:${ seconds < 10 ? '0' + seconds : '' + seconds }`
+}
+
+const Item = ({ itemStatus, title, itemSecondsLeft }) => {
   return (
     <div className="d-flex flex-column align-items-center">
         <div className="row d-flex flex-nowrap align-items-center text-white" style={ setItemStyle(itemStatus) }>
-          <div className="col-9 my-0 text-left">
-            <h4 className="m-2">{ title }</h4>
+          <div className="col-8 my-0 text-left">
+            <h5 className="m-2">{ title }</h5>
           </div>
-          <div className="md-form col-3 my-0">
-            <h4 className="m-2">{ timeMinutes }</h4>
+          <div className="md-form col-4 my-0">
+            <h4 className="m-2">{ formatTime(itemSecondsLeft) }</h4>
           </div>
         </div>
       </div>
