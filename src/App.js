@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import './App.css';
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -122,7 +122,7 @@ class App extends Component {
           <Route exact path='/createSchedule' component={ () => <CreateSchedule test={ {children: this.state.children,
           pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
-          <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
+          <Route exact path='/inProgressSchedule' component={ () => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } planId={ 1 } /> }/>
           <Route exact path='/myProfile' component={MyProfile}/>
           <Route exact path='/editSchedule' component={EditSchedule}/>
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
