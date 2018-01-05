@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function format24TimeTo12(timeString) {
   if (!timeString) return '--'
@@ -40,12 +41,15 @@ const MainStatusBar = ({ running, duration, timeLeft, deadline, functions: stopT
             </h5>
           </div>
         </div>
-        <button type="button"
-                onClick={ stopTimer }
-                className={ running ? "col-4 btn btn-danger btn-block text-lowercase m-1" : "col-4 btn btn-danger btn-block text-lowercase m-1 disabled" } 
-                style={{ height: '50px', border: '2px solid #1C77C3', padding: '15px 0' }} >
-          <h6 className="p-0">I Made It!</h6>
-        </button>
+        { running ? 
+          <button type="button" onClick={ stopTimer } className="col-4 btn btn-danger btn-block text-lowercase m-1" style={{ height: '50px', border: '2px solid #1C77C3', padding: '15px 0' }} >
+            <h6 className="p-0">I made it!</h6>
+          </button>
+          :
+          <button type="button" className="col-4 btn btn-warning btn-block text-lowercase m-1" style={{ height: '50px', border: '2px solid #1C77C3', padding: '15px 0' }} >
+            <Link to={'/'}><h6 className="p-0 text-white">cancel</h6></Link>
+          </button>
+        }
       </div>
     </div>
   )
