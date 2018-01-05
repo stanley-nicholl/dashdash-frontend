@@ -145,7 +145,7 @@ class App extends Component {
 
           <Route exact path='/configuring' component={Configuring}/>
 
-          <Route exact path='/createSchedule' component={ (props) => <CreateSchedule { ...props } test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId }} />} />
+          <Route exact path='/createSchedule' component={ (props) => <CreateSchedule { ...props } test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId, setState: this.saveAppState }} />} />
 
           <Route exact path='/myProfile' component={(props) => <MyProfile { ...props } firstname={this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} userId={this.state.userId}/>}/>
 

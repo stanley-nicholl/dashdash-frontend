@@ -20,7 +20,6 @@ class CreateSchedule extends Component{
       templateItems: [],
       scheduleType: this.props.test.newScheduleType,
       newArrivalTime: this.props.test.newArrivalTime,
-      newArrivalTimeDb: null,
       pets: this.props.test.pets,
       children: this.props.test.children,
       activeDays: [],
@@ -32,16 +31,6 @@ class CreateSchedule extends Component{
 
   //set state after async API call
   async componentDidMount() {
-    let time
-    if(this.state.newArrivalTimeDb === null){
-      if(this.state.newArrivalTime.substring(5) === 'PM'){
-        let tempTime = this.state.newArrivalTime.substring(5,0)
-        console.log(tempTime);
-      }
-
-    }else{
-      time = this.state.newArrivalTimeDb
-    }
     //figure which template to load
     console.log(this.state.newArrivalTime);
     let target = this.findTemplate()
@@ -131,16 +120,21 @@ class CreateSchedule extends Component{
 
   writeToDb = async () => {
     let time
-    if(this.state.newArrivalTimeDb === null){
-      const tempTime = this.state.newArrivalTime.split()
+    if(this.state.newArrivalTime.substring(5) === 'PM'){
+      let tempTime = this.state.newArrivalTime.substring(5,0).split(':')
+      const newHour = parseInt(tempTime[0])+12
+      time = `${newHour}:${tempTime[1]}:00`
+      console.log(time);
     }else{
-      time = this.state.newArrivalTimeDb
+      let tempTime = this.state.newArrivalTime.substring(5,0).split(':')
+      time = `${tempTime[0]}:${tempTime[1]}:00`
+      console.log(time);
     }
 
     const plan = {
       name: this.state.templateName,
       active: true,
-      deadline: this.state.newArrivalTime,
+      deadline: time,
       days_to_run: this.state.activeDays.join()
     }
 
@@ -148,8 +142,11 @@ class CreateSchedule extends Component{
       return a.order - b.order
     })
 
+
+
     let targetItems = planItems.map( item => {
-      return {name: item.name, duration: item.duration, skippable: item.skippable}
+      let duration = `00:${item.duration}:00`
+      return {name: item.name, duration: duration, skippable: item.skippable}
     })
 
     const token = localStorage.getItem('dashdashUserToken')
@@ -180,8 +177,20 @@ class CreateSchedule extends Component{
     })
 
     Promise.all(promises)
-      .then( result =>{
-        console.log(result);
+      .then( async result =>{
+
+        const token = localStorage.getItem('dashdashUserToken')
+
+        const plansDataResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/users/${this.state.userId}`, {
+          headers: {
+            'authorization': `Bearer ${token}`
+          }
+        })
+        const plansDataJSON = await plansDataResponse.json()
+        const plans = plansDataJSON.Plans
+        this.props.test.setState({plans: plans})
+      })
+      .then( plan => {
         this.props.history.push('/')
       })
       .catch(console.error)
@@ -217,7 +226,7 @@ class CreateSchedule extends Component{
     }else{
       newTime = `${temp[0]}:${temp[1]} AM`
     }
-    this.setState({newArrivalTime: newTime, newArrivalTimeDb: time})
+    this.setState({newArrivalTime: newTime})
   }
 
   addItem = (item) => {
