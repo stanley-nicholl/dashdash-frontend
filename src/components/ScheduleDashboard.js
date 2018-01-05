@@ -4,12 +4,12 @@ import ScheduleTile from './ScheduleTile'
 import AddNewButton from './common-elements/AddNewButton'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
-const ScheduleDashboard = ({plans, firstname, history}) => {
+const ScheduleDashboard = ({plans, firstname}) => {
 
 
   return(
   <div className="ScheduleDashboard">
-    <Headertype history={history} />
+    <Headertype />
     <h1 className="container">{firstname}'s Schedules</h1>
     {plans.map((plan, index)=>{
       return <ScheduleTile key={index}  name={plan.name} active={plan.active} startTime={plan.start_time} />

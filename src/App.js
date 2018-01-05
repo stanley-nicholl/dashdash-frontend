@@ -117,8 +117,6 @@ class App extends Component {
           <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
 
-          {/* <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time ={this.state.newArrivalTime} history={ history }/>}/> */}
-
           <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time={this.state.newArrivalTime} updateNewScheduleArrivalTimeData={this.updateNewScheduleArrivalTimeData} history={ history }/>}/>
 
           <Route exact path='/navigation' component= {()=> <Navigation />}/>
@@ -134,11 +132,9 @@ class App extends Component {
 
           <Route exact path='/editSchedule' component={EditSchedule}/>
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
-          {/* <Route exact path='/navigation' component={Navigation}/> */}
-
-          <Route exact path='/' component={({history})=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} history={history} />}/>
+          <Route exact path='/navigation' component={Navigation}/>
           <Route exact path='/header' component={Headertype}/>
-          {/* <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/> */}
+          <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
     )
