@@ -2,22 +2,24 @@ import Badge from './common-elements/Badge'
 import React, { Component } from 'react';
 
 class MyProfile extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      badges:[],
+      firstname:this.props.firstname ,
+      lastname:this.props.lastname,
+      userId: this.props.userId,
+      children:this.props.kids,
+      pets:this.props.pets,
+      badgesReceived:false
+    }
 
-  // fetchUserBadges = async ()=>{
-  //   const token = localStorage.getItem('dashdashUserToken')
-  //
-  //   let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${this.props.state.userId}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'authorization': `Bearer ${token}`
-  //     }
-  //   })
-  //   // let allBadges = await badgesResponce.json()
-  //   // this.setState({badges:allBadges})
-  // }
+  }
+
   async componentDidMount(){
+    console.log(this.state)
     const token = localStorage.getItem('dashdashUserToken')
-    let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${this.props.state.userId}`, {
+    let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${this.state.userId}`, {
       method: 'GET',
       headers: {
         'authorization': `Bearer ${token}`
@@ -25,10 +27,26 @@ class MyProfile extends Component {
     })
 
     let allBadges = await badgesResponce.json()
-    this.setState({badges:allBadges})
+    this.setState({
+      badges: allBadges,
+      badgesReceived:true
+    })
+
   }
 
   render() {
+
+
+
+    let data
+    if(this.state.badgesReceived && this.state.badges.Badges){
+      data=this.state.badges.Badges
+    }
+    else{
+      data = []
+      console.log('test')
+    }
+
 
     return (
       <div className="body">
@@ -41,7 +59,7 @@ class MyProfile extends Component {
             <img className="profile-img mb-2" src="./img/branding/running-man-orange.svg" alt="running man" />
           </div>
           <div className="col-5">
-            <h5 className="text-left">{this.props.firstname}<br/>{this.props.lastname}</h5>
+            <h5 className="text-left">{this.state.firstname}<br/>{this.state.lastname}</h5>
           </div>
           <div className="col-1"></div>
         </div>
@@ -51,7 +69,7 @@ class MyProfile extends Component {
             <div className="switch">
               <label>
                 no
-                <input type="checkbox" defaultChecked={this.props.children ? 'checked' : ''}/>
+                <input type="checkbox" defaultChecked={this.state.children ? 'checked' : ''}/>
                 <span className="lever"></span>
                 yes
               </label>
@@ -62,7 +80,7 @@ class MyProfile extends Component {
             <div className="switch">
               <label>
                 no
-                <input type="checkbox" defaultChecked={this.props.pets ? 'checked' : ''}/>
+                <input type="checkbox" defaultChecked={this.state.pets ? 'checked' : ''}/>
                 <span className="lever"></span>
                 yes
               </label>
@@ -72,9 +90,10 @@ class MyProfile extends Component {
         <h5 className="mb-4">Achievements</h5>
         <div className="container">
           <div className="row">
-            {/* {this.state.badages.map((badge, index) => {
+            {console.log(data)}
+            {data.map((badge, index) => {
               return <Badge badge={badge} key={index} />
-            })} */}
+            })}
           </div>
         </div>
       </div>
