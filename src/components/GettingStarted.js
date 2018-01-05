@@ -1,4 +1,3 @@
-import {BrowserRouter as Router, Link} from 'react-router-dom'
 import NextButton from './common-elements/NextButton'
 import React, { Component } from 'react';
 
@@ -35,7 +34,7 @@ class GettingStarted extends Component {
     return (
       <div className="body">
         <h2 className="py-4 mb-4 title font-weight-bold">two quick questions</h2>
-        <img className="selection-img mb-2" src="./img/branding/kids-orange.svg" />
+        <img className="selection-img mb-2" src="./img/branding/kids-orange.svg" alt="kids"/>
         <h5 className="mb-4">do you have kids?</h5>
         <form>
           <div className="switch">
@@ -47,7 +46,7 @@ class GettingStarted extends Component {
             </label>
           </div>
           <br/>
-          <img className="selection-img mt-4  mb-2" src="./img/branding/pets-orange.svg" />
+          <img className="selection-img mt-4  mb-2" src="./img/branding/pets-orange.svg" alt="pets" />
           <h5 className="mb-4">do you have pets?</h5>
           <div className="switch">
             <label>

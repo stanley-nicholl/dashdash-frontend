@@ -8,18 +8,27 @@ function setItemStyle (style) {
       return { backgroundColor:'darkgrey', width:'80vw', margin: '5px 0' }
     case 'upcoming' :
       return { backgroundColor:'goldenrod', width:'80vw', margin: '5px 0' }
+    default :
+      break
   }
 }
 
-const Item = ({ style, title, time }) => {
+function formatTime(timeSeconds) {
+  if (typeof timeSeconds !== 'number') return '--'
+  const minutes = Math.floor(timeSeconds / 60)
+  const seconds = timeSeconds % 60
+  return `${ '' + minutes }:${ seconds < 10 ? '0' + seconds : '' + seconds }`
+}
+
+const Item = ({ itemStatus, title, itemSecondsLeft }) => {
   return (
     <div className="d-flex flex-column align-items-center">
-        <div className="row d-flex flex-nowrap align-items-center text-white" style={ setItemStyle(style) }>
-          <div className="col-9 my-0 text-left">
-            <h4 className="m-2">{ title }</h4>
+        <div className="row d-flex flex-nowrap align-items-center text-white" style={ setItemStyle(itemStatus) }>
+          <div className="col-8 my-0 text-left">
+            <h5 className="m-2">{ title }</h5>
           </div>
-          <div className="md-form col-3 my-0">
-            <h4 className="m-2">{ time }</h4>
+          <div className="md-form col-4 my-0">
+            <h4 className="m-2">{ formatTime(itemSecondsLeft) }</h4>
           </div>
         </div>
       </div>

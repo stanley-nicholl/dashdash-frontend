@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 class Configuring extends Component{
   componentDidMount = () => {
@@ -10,7 +9,7 @@ class Configuring extends Component{
     return (
       <div className="body d-flex flex-column justify-content-between">
         <h2 className="py-4 mb-4 title font-weight-bold">building schedule</h2>
-        <img className="loading" src="./img/branding/loading-orange.svg" />
+        <img className="loading" src="./img/branding/loading-orange.svg" alt="loading" />
         <div className="py-3">
           <h4 className="font-weight-bold mt-1">configuring. . .</h4>
         </div>

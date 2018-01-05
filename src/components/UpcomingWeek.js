@@ -1,5 +1,7 @@
 import React from 'react'
 import UpcomingDay from './common-elements/UpcomingDay'
+import Headertype from './common-elements/Header'
+import Navigation from './common-elements/Navigation'
 
 const days = ['Su','M', 'T', 'W', 'Th', 'F', 'S']
 
@@ -7,17 +9,27 @@ const days = ['Su','M', 'T', 'W', 'Th', 'F', 'S']
 
 const UpcomingWeek = () => {
 
+  const openNav = () => {
+      const test = document.getElementById("side-nav").style.width = "85vw";
+      console.log(test);
+  }
+
+  const closeNav = () => {
+      document.getElementById("side-nav").style.width = "0";
+  }
+
   return (
     <div className="body">
-      {/* <Common-header /> */}
-      <h1 className="title">DASH DASH</h1>
-      <h3 className="mt-2 mb-3">Upcoming Week</h3>
+      <Navigation closeNav={closeNav}/>
+      <Headertype openNav={openNav}/>
+      <h2 className="pt-3 pb-0">Upcoming Week</h2>
+      <small className="upcoming-footnote pt-0 pb-3">*snooze skips schedule for one instance</small>
       <div className="upcoming-content d-flex flex-column justify-content-between container">
         {days.map(day => {
           return <UpcomingDay day={day} />
         })}
       </div>
-      <small className="upcoming-footnote">*snooze skips schedule for one instance</small>
+
     </div>
   )
 }

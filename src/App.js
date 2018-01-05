@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
-import './App.css';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import './App.css'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import GettingStarted from './components/GettingStarted'
@@ -16,8 +16,8 @@ import InProgressSchedule from './components/InProgressSchedule'
 import Navigation from './components/common-elements/Navigation'
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       userToken: localStorage.getItem('dashdashUserToken'),
       userId: null,
@@ -132,26 +132,30 @@ class App extends Component {
           { !this.state.userToken ? <Redirect push to='/signIn' /> : null }
 
           <Route exact path='/signIn' component={ ({ history }) => <SignIn history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+
           <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
+
           <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
+
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
           <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time ={this.state.newArrivalTime} history={ history }/>}/>
 
           <Route exact path='/navigation' component= {()=> <Navigation />}/>
 
           <Route exact path='/configuring' component={Configuring}/>
-          <Route exact path='/createSchedule' component={ () => <CreateSchedule test={ {children: this.state.children,
-          pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime}} />} />
 
-          <Route exact path='/inProgressSchedule' component={InProgressSchedule}/>
+          <Route exact path='/createSchedule' component={ ({ history }) => <CreateSchedule test={{ children: this.state.children, pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId }} history={history} />} />
           <Route exact path='/myProfile' component={()=><MyProfile firstname= {this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} userId={this.state.userId}/>}/>
+          <Route path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
 
+          <Route exact path='/myProfile' component={()=><MyProfile state={this.state}/>}/>
 
           <Route exact path='/editSchedule' component={EditSchedule}/>
-          <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
-          <Route exact path='/navigation' component={Navigation}/>
 
-          <Route exact path='/' component={({history})=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} history={history} />}/>
+          <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
+
+          <Route exact path='/navigation' component={Navigation}/>
+          <Route exact path='/' component={ () => <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
     )

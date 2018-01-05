@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import DayOfWeekBtn from './common-elements/DayOfWeekBtn'
 import AddNewButton from './common-elements/AddNewButton'
 import CreatePlanItem from './common-elements/CreatePlanItem'
@@ -60,7 +60,7 @@ class CreateSchedule extends Component{
       activeDays = [...this.state.activeDays, day]
     }else{
       activeDays = this.state.activeDays.filter(item => {
-        if(item !== day) return item
+        return item !== day
       })
     }
     this.setState({activeDays: activeDays})
@@ -204,7 +204,7 @@ class CreateSchedule extends Component{
   addItem = (item) => {
     const sequence = []
     this.state.templateItems.forEach( item => {
-      sequence.push(parseInt(item.order))
+      sequence.push(parseInt(item.order, 10))
     })
     let max = sequence.reduce( (a,b) => {
       return Math.max(a,b)
@@ -218,7 +218,7 @@ class CreateSchedule extends Component{
       skippable: skippable,
       order: max
     }
-    const newCounterNum = this.state.tempIdCounter++
+    const newCounterNum = this.state.tempIdCounter + 1
     const updatedItems = [...this.state.templateItems, newItem]
     this.setState({ templateItems: updatedItems,  tempIdCounter: newCounterNum})
   }
@@ -227,9 +227,7 @@ class CreateSchedule extends Component{
     let updatedItems
     if(command === 'delete'){
       updatedItems = this.state.templateItems.filter(item => {
-        if(item.order !== target.order){
-          return item
-        }
+        return item.order !== target.order
       })
     }else if(command === 'edit'){
       const { id, name, skippable, duration, order } = target
@@ -282,7 +280,7 @@ class CreateSchedule extends Component{
       <div className="body">
         <div className="d-flex title align-items-center justify-content-center">
           <h3 className="py-4 title font-weight-bold">{this.state.templateName}</h3>
-          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg"  onClick={e => this.showModal('name')}/>
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-white.svg" alt="edit" onClick={e => this.showModal('name')}/>
         </div>
         <div className="container">
           <div className="days d-flex justify-content-around my-3">
@@ -293,7 +291,7 @@ class CreateSchedule extends Component{
         </div>
         <div className="d-flex justify-content-center">
           <h2>{this.state.newArrivalTime}</h2>
-          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-blue.svg" onClick={e => this.showModal('time')} />
+          <img className="edit-img pl-1 mb-2 ml-3" src="./img/branding/edit-blue.svg" alt="edit" onClick={e => this.showModal('time')} />
         </div>
 
         <div className="item-section">

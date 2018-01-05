@@ -34,7 +34,7 @@ const CreateItemModel = ({addItem}) => {
                 </div>
                 <div id="user-modal-body" className="modal-body mb-0">
                   <div>
-                    <input className="mb-0" type="text" id="new-name" className="form-control"/>
+                    <input className="form-control mb-0" type="text" id="new-name" />
                     <small className="mt-0">task name</small>
                   </div>
 
@@ -44,7 +44,7 @@ const CreateItemModel = ({addItem}) => {
                   </div>
 
                   <div className="mb-3">
-                    <input className="mb-0" type="number" className="form-control" id="new-duration"/>
+                    <input className="form-control mb-0" type="number" id="new-duration"/>
                     <small className="mt-0">duration <small>(in minutes)</small></small>
                   </div>
 
