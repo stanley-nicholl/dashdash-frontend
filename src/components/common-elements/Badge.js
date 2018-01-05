@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Badge = (badge) => {
+const Badge = ({ badge }) => {
   return(
     <div className="col-6">
       <img className="badge-img" src={badge.image} alt="badge" />

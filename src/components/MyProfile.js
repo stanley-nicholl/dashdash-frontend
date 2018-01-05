@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 class MyProfile extends Component {
   constructor(props){
     super(props)
+
     this.state={
       badges:[],
-      firstname:this.props.firstname ,
+      firstname:this.props.firstname,
       lastname:this.props.lastname,
       userId: this.props.userId,
       children:this.props.kids,
@@ -16,8 +17,8 @@ class MyProfile extends Component {
 
   }
 
-  async componentDidMount(){
-    console.log(this.state)
+  componentDidMount = async () => {
+    if (!this.props.userId) return
     const token = localStorage.getItem('dashdashUserToken')
     let badgesResponce = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/badges/user/${this.state.userId}`, {
       method: 'GET',
@@ -44,7 +45,6 @@ class MyProfile extends Component {
     }
     else{
       data = []
-      console.log('test')
     }
 
 
@@ -90,7 +90,7 @@ class MyProfile extends Component {
         <h5 className="mb-4">Achievements</h5>
         <div className="container">
           <div className="row">
-            {console.log(data)}
+            { this.state.badges ? null : <Badge badge={{ id: 1, name: 'Newbie', description: 'Creating your first schedule', image: '../img/badges/newbie.svg' }} key="default" /> }
             {data.map((badge, index) => {
               return <Badge badge={badge} key={index} />
             })}
