@@ -24,7 +24,7 @@ const ScheduleDashboard = ({plans, firstname}) => {
       <h2 className="py-3">{firstname}'s Schedules</h2>
       <div className="schedule-section row mx-3">
         {plans.map((plan, index)=>{
-          return <ScheduleTile key={index} name={plan.name} active={plan.active} startTime={plan.start_time} />
+          return <ScheduleTile key={index} planId={plan.id} name={plan.name} active={plan.active} startTime={plan.start_time} />
         })}
       </div>
     </div>

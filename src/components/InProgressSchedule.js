@@ -10,6 +10,7 @@ class InProgressSchedule extends Component {
     super(props)
 
     this.state = {
+      planId: Number(this.props.match.params.planId),
       plan: {},
       items: [],
       duration: null, //in seconds
@@ -28,7 +29,7 @@ class InProgressSchedule extends Component {
     // catch error where navigating directly to this component before app has fetched user data
     if (!this.props.userId) return null
     // get plan data
-    const planResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/${this.props.planId}/users/${this.props.userId}`, {
+    const planResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/${this.state.planId}/users/${this.props.userId}`, {
       headers: {
         'authorization': `Bearer ${this.props.token}`
       }
@@ -42,7 +43,7 @@ class InProgressSchedule extends Component {
     if (deadline > startTime) duration = deadline - startTime
     else duration = (24 * 60 * 60) + deadline - startTime
     // get all plan items
-    const planItemsResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/${this.props.planId}/users/${this.props.userId}/items`, {
+    const planItemsResponse = await fetch(`${process.env.REACT_APP_DASHDASH_API_URL}/plans/${this.state.planId}/users/${this.props.userId}/items`, {
       headers: {
         'authorization': `Bearer ${this.props.token}`
       }
