@@ -116,7 +116,7 @@ class App extends Component {
           <Route exact path='/signUp' component={ ({ history }) => <SignUp history={ history } functions={ { saveAppState: this.saveAppState, fetchUserData: this.fetchUserData } } /> } />
 
           <Route exact path='/gettingStarted' component={ ({history}) => <GettingStarted updateNewScheduleKidsPetsData= {this.updateNewScheduleKidsPetsData} history={ history } id={this.state.userId} />}/>
-          
+
           <Route exact path='/scheduleType' component={ () => <ScheduleType updateNewScheduleTypeData= {this.updateNewScheduleTypeData} />}/>
 
           <Route exact path='/arrivalTime' component={({history})=> <ArrivalTime time={this.state.newArrivalTime} updateNewScheduleArrivalTimeData={this.updateNewScheduleArrivalTimeData} history={ history }/>}/>
@@ -124,7 +124,7 @@ class App extends Component {
           <Route exact path='/navigation' component= {()=> <Navigation />}/>
 
           <Route exact path='/configuring' component={Configuring}/>
-          
+
           <Route exact path='/createSchedule' component={ ({ history }) => <CreateSchedule test={ {children: this.state.children,
           pets: this.state.pets, newScheduleType: this.state.newScheduleType, newArrivalTime: this.state.newArrivalTime, userId: this.state.userId}} history={history} />} />
 
@@ -133,16 +133,10 @@ class App extends Component {
           <Route exact path='/myProfile' component={()=><MyProfile state={this.state}/>}/>
 
           <Route exact path='/editSchedule' component={EditSchedule}/>
-          
-          <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
-          
-          <Route exact path='/navigation' component={Navigation}/>
-<<<<<<< HEAD
-=======
-          
-          <Route exact path='/header' component={Headertype}/>
 
->>>>>>> cf1939e1bb1742e1369704527ebac1596e315898
+          <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
+
+          <Route exact path='/navigation' component={Navigation}/>
           <Route exact path='/' component={()=> <ScheduleDashboard plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
