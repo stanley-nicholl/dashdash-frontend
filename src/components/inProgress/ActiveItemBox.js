@@ -1,16 +1,18 @@
 import React from 'react'
 
-function formatTime(timeMinutes, timeSeconds) {
-  if (!timeMinutes || !timeSeconds) return '--'
-  return `${ timeMinutes < 10 ? '0' + timeMinutes : timeMinutes }:${ timeSeconds < 10 ? '0' + timeSeconds : timeSeconds }`
+function formatTime(timeSeconds) {
+  if (!timeSeconds) return '--'
+  const minutes = Math.floor(timeSeconds / 60)
+  const seconds = timeSeconds % 60
+  return `${ minutes < 10 ? '0' + minutes : '' + minutes }:${ seconds < 10 ? '0' + seconds : '' + seconds }`
 }
 
 const ActiveItemBox = ({ currentItem, running, functions: { startTimer, advanceItem } }) => {
-  let name, timeMinutes, timeSeconds
+  let name, shortName, itemSecondsLeft
   if (currentItem) {
     name = currentItem.name
-    timeMinutes = currentItem.timeMinutes
-    timeSeconds = currentItem.timeSeconds
+    shortName = name.length > 13 ? name.slice(0, 13) + '...' : name
+    itemSecondsLeft = currentItem.itemSecondsLeft
   }
   return (
     <div className="container text-white" style={{ backgroundColor: '#EAEBED' }}>
@@ -18,14 +20,14 @@ const ActiveItemBox = ({ currentItem, running, functions: { startTimer, advanceI
         <div className="col-7 p-0">
           <div className="p-0 m-1" style={{backgroundColor: 'rgb(80, 194, 66)', height: '50px', border: '2px solid #1C77C3' }}>
             <h6 className="m-0 p-0">current item:</h6>
-            <h4 className="m-0 p-0">{ name ? name : '--' }</h4>
+            <h4 className="m-0 p-0">{ shortName ? shortName : '--' }</h4>
           </div>
         </div>
         <div className="col-5 p-0">
           <div className="m-1" 
-               style={ timeMinutes < 1 ? { backgroundColor: 'orangeRed', height: '50px', border: '2px solid #1C77C3' } : 
+               style={ itemSecondsLeft < 11 ? { backgroundColor: 'orangeRed', height: '50px', border: '2px solid #1C77C3' } : 
                                   { backgroundColor: 'rgb(80, 194, 66)', height: '50px', border: '2px solid #1C77C3' } }>
-            <h1 className="m-0 p-0">{ formatTime(timeMinutes, timeSeconds) }</h1>
+            <h1 className="m-0 p-0">{ formatTime(itemSecondsLeft) }</h1>
           </div>
         </div>
       </div>

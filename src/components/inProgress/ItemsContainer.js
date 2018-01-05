@@ -4,9 +4,9 @@ import Item from './Item'
 function mapItems(current, items) {
   return items.map((el, index) => {
     let itemStatus = 'upcoming'
-    if (el === current) itemStatus = 'current'
-    if (el < current) itemStatus = 'previous'
-    return <Item key={ index } itemStatus={ itemStatus } title={ el.name } timeMinutes={ el.timeMinutes } />
+    if (index === current) itemStatus = 'current'
+    if (index < current) itemStatus = 'previous'
+    return <Item key={ index } itemStatus={ itemStatus } title={ el.name } itemSecondsLeft={ el.itemSecondsLeft } />
   })
 }
 
