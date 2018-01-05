@@ -57,9 +57,9 @@ class App extends Component {
     this.setState({newScheduleType: type})
   }
 
-  // updateNewScheduleKidsPetsData = (kids, pets) => {
-  //   this.setState({children: kids, pets: pets})
-  // }
+  updateNewScheduleArrivalTimeData = (time) => {
+    this.setState({newArrivalTime: time})
+  }
 
   shouldComponentUpdate() {
     if (window.location.pathname === '/signUp') return false //do not rerender when saving state on signUp page
