@@ -2,7 +2,7 @@ import React from 'react';
 import Headertype from './common-elements/Header'
 import ScheduleTile from './ScheduleTile'
 import AddNewButton from './common-elements/AddNewButton'
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const ScheduleDashboard = ({plans, firstname}) => {
 

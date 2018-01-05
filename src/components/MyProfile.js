@@ -38,7 +38,7 @@ class MyProfile extends Component {
         <div className="row mt-4 border border-primary border-top-0 border-right-0 border-left-0 pb-2">
           <div className="col-1"></div>
           <div className="col-5">
-            <img className="profile-img mb-2" src="./img/branding/running-man-orange.svg" />
+            <img className="profile-img mb-2" src="./img/branding/running-man-orange.svg" alt="running man" />
           </div>
           <div className="col-5">
             <h5 className="text-left">{this.props.firstname}<br/>{this.props.lastname}</h5>

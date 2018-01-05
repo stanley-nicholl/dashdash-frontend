@@ -76,7 +76,7 @@ class EditItemModel extends Component {
                   </div>
                   <div id="user-modal-body" className="modal-body mb-0">
                     <div>
-                      <input className="mb-0" defaultValue={item.name} type="text" id="task-name" className="form-control"/>
+                      <input className="form-control mb-0" defaultValue={item.name} type="text" id="task-name" />
                       <small className="mt-0">task name</small>
                     </div>
 
@@ -86,7 +86,7 @@ class EditItemModel extends Component {
                     </div>
 
                     <div className="mb-3">
-                      <input className="mb-0" defaultValue={item.duration} id="task-duration" type="number" className="form-control"/>
+                      <input className="form-control mb-0" defaultValue={item.duration} id="task-duration" type="number" />
                       <small className="mt-0">duration <small>(in minutes)</small></small>
                     </div>
 
