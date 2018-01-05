@@ -68,6 +68,7 @@ class InProgressSchedule extends Component {
   }
 
   startTimer = () => {
+    document.activeElement.blur()
     this.setState((prevState, props) => {
       return { running: true, currentItemIndex: 0, timeLeft: this.state.duration }
     }, () => {
@@ -96,6 +97,7 @@ class InProgressSchedule extends Component {
   }
 
   advanceItem = () => {
+    document.activeElement.blur()
     this.setState((prevState, props) => {
       const currentIndex = prevState.currentItemIndex
       let itemsLeft = prevState.items.length - currentIndex - 1
@@ -114,6 +116,7 @@ class InProgressSchedule extends Component {
   }
 
   stopTimer = () => {
+    document.activeElement.blur()
     clearInterval(this.state.intervalId)
     this.setState({ running: false, currentItemIndex: null, timeLeft: null, intervalId: null })
     this.resetData()
