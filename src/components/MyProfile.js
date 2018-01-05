@@ -1,5 +1,7 @@
-import Badge from './common-elements/Badge'
 import React, { Component } from 'react';
+import Badge from './common-elements/Badge'
+import Navigation from './common-elements/Navigation'
+import Headertype from './common-elements/Header'
 
 class MyProfile extends Component {
   constructor(props){
@@ -35,10 +37,16 @@ class MyProfile extends Component {
 
   }
 
+  openNav = () => {
+      const test = document.getElementById("side-nav").style.width = "85vw";
+      console.log(test);
+  }
+
+  closeNav = () => {
+      document.getElementById("side-nav").style.width = "0";
+  }
+
   render() {
-
-
-
     let data
     if(this.state.badgesReceived && this.state.badges.Badges){
       data=this.state.badges.Badges
@@ -47,11 +55,10 @@ class MyProfile extends Component {
       data = []
     }
 
-
     return (
       <div className="body">
-        {/* <Common-header /> */}
-        <h1 className="title">DASH DASH</h1>
+        <Navigation closeNav={this.closeNav}/>
+        <Headertype openNav={this.openNav}/>
         <h3 className="mt-2">My Profile</h3>
         <div className="row mt-4 border border-primary border-top-0 border-right-0 border-left-0 pb-2">
           <div className="col-1"></div>
