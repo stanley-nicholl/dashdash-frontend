@@ -35,8 +35,10 @@ class CreateSchedule extends Component{
     let time
     if(this.state.newArrivalTimeDb === null){
       if(this.state.newArrivalTime.substring(5) === 'PM'){
-        let tempTime = this.state.newArrivalTime.substring(5,0)
-        console.log(tempTime);
+        let tempTime = this.state.newArrivalTime.substring(5,0).split(':')
+        const newHour = tempTime[0]+12
+        time = `${newHour}:${tempTime[1]}:00`
+        console.log(time);
       }
 
     }else{
