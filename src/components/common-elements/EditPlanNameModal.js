@@ -21,7 +21,7 @@ const EditPlanNameModal = ({updateName, name}) => {
             <div id="user-modal-body" className="modal-body mb-0">
               <div>
                 <input className="mb-0" id="name" type="text" className="form-control"/>
-                <small className="mt-0">create new name for your schedule</small>
+                <small className="mt-0">create a new name for your schedule</small>
               </div>
 
               <div className="d-flex justify-content-center">
