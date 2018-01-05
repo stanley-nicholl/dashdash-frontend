@@ -9,7 +9,6 @@ const ScheduleDashboard = ({plans, firstname}) => {
 
   const openNav = () => {
       const test = document.getElementById("side-nav").style.width = "85vw";
-      console.log(test);
   }
 
   const closeNav = () => {

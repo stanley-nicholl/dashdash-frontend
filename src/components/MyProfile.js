@@ -39,7 +39,6 @@ class MyProfile extends Component {
 
   openNav = () => {
       const test = document.getElementById("side-nav").style.width = "85vw";
-      console.log(test);
   }
 
   closeNav = () => {

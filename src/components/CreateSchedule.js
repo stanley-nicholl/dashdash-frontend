@@ -32,7 +32,6 @@ class CreateSchedule extends Component{
   //set state after async API call
   async componentDidMount() {
     //figure which template to load
-    console.log(this.state.newArrivalTime);
     let target = this.findTemplate()
     const template = await this.getTemplateData(target)
     let templateItems = await this.getTemplateItems(target)
@@ -124,11 +123,9 @@ class CreateSchedule extends Component{
       let tempTime = this.state.newArrivalTime.substring(5,0).split(':')
       const newHour = parseInt(tempTime[0])+12
       time = `${newHour}:${tempTime[1]}:00`
-      console.log(time);
     }else{
       let tempTime = this.state.newArrivalTime.substring(5,0).split(':')
       time = `${tempTime[0]}:${tempTime[1]}:00`
-      console.log(time);
     }
 
     const plan = {

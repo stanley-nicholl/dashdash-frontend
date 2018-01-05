@@ -10,7 +10,6 @@ class EditItemModel extends Component {
 
   componentWillReceiveProps = (props) => {
     if(this.props.item.skippable === props.item.skippable) return
-    console.log(props);
     this.setState({activeChecked: props.item.skippable})
   }
 

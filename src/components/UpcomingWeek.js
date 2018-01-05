@@ -10,8 +10,7 @@ const days = ['Su','M', 'T', 'W', 'Th', 'F', 'S']
 const UpcomingWeek = () => {
 
   const openNav = () => {
-      const test = document.getElementById("side-nav").style.width = "85vw";
-      console.log(test);
+    const test = document.getElementById("side-nav").style.width = "85vw";
   }
 
   const closeNav = () => {
