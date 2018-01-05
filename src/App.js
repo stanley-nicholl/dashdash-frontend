@@ -155,7 +155,6 @@ class App extends Component {
 
           <Route exact path='/upcomingWeek' component={UpcomingWeek}/>
 
-          <Route exact path='/navigation' component={Navigation}/>
           <Route exact path='/' component={ (props) => <ScheduleDashboard { ...props } plans={this.state.plans} firstname={this.state.firstname} />}/>
         </div>
       </Router>
