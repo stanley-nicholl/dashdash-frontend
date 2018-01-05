@@ -60,7 +60,7 @@ class CreateSchedule extends Component{
       activeDays = [...this.state.activeDays, day]
     }else{
       activeDays = this.state.activeDays.filter(item => {
-        if(item !== day) return item
+        return item !== day
       })
     }
     this.setState({activeDays: activeDays})
@@ -204,7 +204,7 @@ class CreateSchedule extends Component{
   addItem = (item) => {
     const sequence = []
     this.state.templateItems.forEach( item => {
-      sequence.push(parseInt(item.order))
+      sequence.push(parseInt(item.order, 10))
     })
     let max = sequence.reduce( (a,b) => {
       return Math.max(a,b)
@@ -218,7 +218,7 @@ class CreateSchedule extends Component{
       skippable: skippable,
       order: max
     }
-    const newCounterNum = this.state.tempIdCounter++
+    const newCounterNum = this.state.tempIdCounter + 1
     const updatedItems = [...this.state.templateItems, newItem]
     this.setState({ templateItems: updatedItems,  tempIdCounter: newCounterNum})
   }
@@ -227,9 +227,7 @@ class CreateSchedule extends Component{
     let updatedItems
     if(command === 'delete'){
       updatedItems = this.state.templateItems.filter(item => {
-        if(item.order !== target.order){
-          return item
-        }
+        return item.order !== target.order
       })
     }else if(command === 'edit'){
       const { id, name, skippable, duration, order } = target

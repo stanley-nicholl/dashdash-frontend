@@ -33,11 +33,11 @@ const ActiveItemBox = ({ currentItem, running, functions: { startTimer, advanceI
       </div>
       <div className="row">
         { running ?
-          <button className="col btn btn-block btn-amber m-1 text-lowercase" type="button" onClick={ advanceItem } style={{ height: '50px', border: '2px solid #1C77C3', paddingTop: '15px' }}>
+          <button id="advance-button" className="col btn btn-block btn-amber m-1 text-lowercase" type="button" onClick={ advanceItem } style={{ height: '50px', border: '2px solid #1C77C3', paddingTop: '15px' }}>
             <h6>I'm done with this item - advance me!</h6>
           </button>
           :
-          <button className="col btn btn-danger btn-block m-1 text-lowercase" type="button" onClick={ startTimer } style={{ height: '50px', border: '2px solid #1C77C3', paddingTop: '15px' }}>
+          <button id="start-button" className="col btn btn-danger btn-block m-1 text-lowercase" type="button" onClick={ startTimer } style={{ height: '50px', border: '2px solid #1C77C3', paddingTop: '15px' }}>
             <h6>start timer!</h6>
           </button>
         }
