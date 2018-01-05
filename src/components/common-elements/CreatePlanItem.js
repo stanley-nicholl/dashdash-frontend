@@ -16,7 +16,7 @@ class CreatePlanItem extends Component {
 
   skippable = (skippable) => {
     if(skippable) return <img className="skippable-img pl-2 pr-2 col-2" src="./img/branding/skip-white.svg" alt="skip icon" />
-    return <img className="col-2" alt="blank" />
+    return <img className="col-2" alt="" />
   }
 
   render(){
