@@ -9,5 +9,9 @@ The DashDash client uses JavaScript with React and React Router to present a mob
 ### Development
 2. npm start
 
+## Screenshot
+
+![](dashdash-screenshot.png)
+
 ## Next Steps
 - [ ] Improve layout for non-mobile screens.
