@@ -149,7 +149,7 @@ class App extends Component {
 
           <Route exact path='/myProfile' component={(props) => <MyProfile { ...props } firstname={this.state.firstname} lastname={this.state.lastname} kids={this.state.children} pets={this.state.pets} userId={this.state.userId}/>}/>
 
-          <Route path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
+          <Route exact path='/inProgressSchedule/:planId' component={ (props) => <InProgressSchedule token={ this.state.userToken } userId={ this.state.userId } { ...props } /> }/>
 
           <Route exact path='/editSchedule' component={EditSchedule}/>
 
