@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Navigation = ({closeNav}) => {
 
-  const logOut = () =>{
-    console.log('test');
-    localStorage.remove('dashdashUserToken')
+  const logOut = () => {
+    localStorage.removeItem('dashdashUserToken')
+    window.location.reload()
   }
 
   return (

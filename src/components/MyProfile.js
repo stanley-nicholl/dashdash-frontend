@@ -39,7 +39,6 @@ class MyProfile extends Component {
 
   openNav = () => {
       const test = document.getElementById("side-nav").style.width = "85vw";
-      console.log(test);
   }
 
   closeNav = () => {
@@ -97,7 +96,7 @@ class MyProfile extends Component {
         <h5 className="mb-4">Achievements</h5>
         <div className="container">
           <div className="row">
-            { this.state.badges ? null : <Badge badge={{ id: 1, name: 'Newbie', description: 'Creating your first schedule', image: '../img/badges/newbie.svg' }} key="default" /> }
+            { this.state.badges.length ? null : <Badge badge={{ id: 1, name: 'Newbie', description: 'Creating your first schedule', image: '../img/badges/newbie.svg' }} key="default" /> }
             {data.map((badge, index) => {
               return <Badge badge={badge} key={index} />
             })}

@@ -3,11 +3,11 @@ import React from 'react'
 function setItemStyle (style) {
   switch(style) {
     case 'current' :
-      return { backgroundColor:'rgb(80, 194, 66)', width:'90vw', paddingTop: '5px', paddingBottom: '5px', margin: '10px 0' }
+      return { backgroundColor:'rgb(80, 194, 66)', width:'90%', paddingTop: '5px', paddingBottom: '5px', margin: '10px 0' }
     case 'previous' :
-      return { backgroundColor:'darkgrey', width:'80vw', margin: '5px 0' }
+      return { backgroundColor:'darkgrey', width:'80%', margin: '5px 0' }
     case 'upcoming' :
-      return { backgroundColor:'goldenrod', width:'80vw', margin: '5px 0' }
+      return { backgroundColor:'goldenrod', width:'80%', margin: '5px 0' }
     default :
       break
   }
